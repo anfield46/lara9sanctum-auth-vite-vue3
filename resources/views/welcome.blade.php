@@ -4,16 +4,28 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Laravel Test</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 
-        @vite(['resources/js/app.js'])
+        <link href="{{ asset('assets/devextreme/materialbluelightcompact.css') }}" rel="stylesheet" />
+        
+        <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
+        <link href="{{ mix('css/template.css') }}" rel="stylesheet">
+
+        
     </head>
+    
     <body>
+        <script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
         <div id="app">
             <router-view></router-view>
         </div>
+        
+        <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+
+        <script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="assets/js/scripts.bundle.js"></script>
     </body>
 </html>

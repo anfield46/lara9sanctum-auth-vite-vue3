@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { mapActions } from 'vuex'
 export default {
     name:"login",
@@ -52,6 +53,16 @@ export default {
             processing:false
         }
     },
+    // setup() {
+    //     const activeIndex = ref('1')
+    //     const activeIndex2 = ref('1')
+    //     // const handleSelect = (key: string, keyPath: string[]) => {
+    //     //     console.log(key, keyPath)
+    //     // }
+    //     return {
+    //         activeIndex,activeIndex2
+    //     };
+    // },
     methods:{
         ...mapActions({
             signIn:'auth/login'
