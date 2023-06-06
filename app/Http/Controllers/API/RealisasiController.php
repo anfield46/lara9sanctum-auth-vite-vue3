@@ -9,7 +9,7 @@ use App\Helpers\Core;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\ImportProgramDekarbon;
+use App\Imports\ImportRealisasiProgramDekarbon;
 
 class RealisasiController extends Controller
 {
@@ -43,7 +43,7 @@ class RealisasiController extends Controller
 
     public function import(Request $request)
     {
-        Excel::import(new ImportProgramDekarbon, $request->file('file')->store('files'));
+        Excel::import(new ImportRealisasiProgramDekarbon, $request->file('file')->store('files'));
         return response()->json(array('messageinput'   => '1', 'message' => 'Data Berhasil disimpan.'));
     }
 
