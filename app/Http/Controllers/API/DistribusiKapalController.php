@@ -16,7 +16,7 @@ class DistribusiKapalController extends Controller
     /////////////////////////// master data
     public function loaddistribusikapal(Request $request, Core $devextreme) //dx grid
     {
-        $distribusikapal = DB::table('ms_distribusi_kapal as a')
+        $distribusikapal = DB::table('vw_distribusi_kapal as a')
             ->select('a.*');
         $data = $devextreme->data($distribusikapal, $request, 'id');
         $datax1 = array();
@@ -26,15 +26,15 @@ class DistribusiKapalController extends Controller
                 'tahun' => $d->tahun,
                 'consumption_liter' => $d->consumption_liter,
                 'consumption_tj' => $d->consumption_tj,
-                'conversion_factor' => $d->conversion_factor,
-                'CO2_emission_factor' => $d->CO2_emission_factor,
-                'CO2_emission' => $d->CO2_emission,
-                'CH4_emission_factor' => $d->CH4_emission_factor,
-                'CH4_emission' => $d->CH4_emission,
-                'N2O_emission_factor' => $d->N2O_emission_factor,
-                'N2O_emission' => $d->N2O_emission,
-                'ton_CO2eq' => $d->ton_CO2eq,
-                'kg_CO2eq' => $d->kg_CO2eq,
+                'conversion_factor' => $d->conversion_on_factor,
+                'CO2_emission_factor' => $d->co2_emission_factor,
+                'CO2_emission' => $d->co2_emission,
+                'CH4_emission_factor' => $d->ch4_emission_factor,
+                'CH4_emission' => $d->ch4_emission,
+                'N2O_emission_factor' => $d->n2o_emission_factor,
+                'N2O_emission' => $d->n2o_emission,
+                'ton_CO2eq' => $d->ton_co2eq,
+                'kg_CO2eq' => $d->kg_co2eq, 
             );
         }
         return response()->json(

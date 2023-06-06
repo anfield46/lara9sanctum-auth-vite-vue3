@@ -21,8 +21,8 @@ class ImportNpkUrea implements ToModel, WithHeadingRow
                 'tahun' => $row['tahun'],
                 'jenis' => $row['jenis'],
                 'annual_amount' => $row['annual_amount'],
-                'emission_factor' => $row['emission_factor'],
-                'annual_CO2eq' => $row['annual_co2eq'],
+                // 'emission_factor' => $row['emission_factor'],
+                // 'annual_CO2eq' => $row['annual_co2eq'],
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ]);

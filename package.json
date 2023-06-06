@@ -25,6 +25,8 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@amcharts/amcharts4": "^4.10.35",
+        "@element-plus/icons-vue": "^2.1.0",
         "@vitejs/plugin-vue": "^3.0.1",
         "bootstrap-vue": "^2.23.1",
         "devextreme": "22.2.6",

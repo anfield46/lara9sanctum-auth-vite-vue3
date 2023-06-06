@@ -49,30 +49,17 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="pabrik" v-slot="{ value, field, errorMessage }">
+                            <Field name="pabrik" type="select" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Pabrik" required>
-                                <el-input
-                                placeholder="Pabrik"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in pabrik_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="sumber_emisi" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Sumber Emisi" required>
-                                <el-input
-                                placeholder="Sumber Emisi"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
@@ -80,45 +67,20 @@
 
                     <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="combustion_eficiency" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Combustion Eficiency" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                            <Field name="sumber_emisi" type="select" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Nama Sumber Emisi" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in sumberemisi_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
-                        <el-col :span="12">
-                            <Field name="conversion_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Conversion Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="stoichiometric_mass_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Stoichiometric Mass Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
+                        <el-col :span="7">
                             <Field name="volume_of_methane" type="number" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Volume Of Methane" required>
                                 <el-input
@@ -134,26 +96,14 @@
 
                     <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="CO2_emission_gg_year" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emission gg/year" required>
-                                <el-input
-                                placeholder="0"
+                            <Field name="perfect_burn" v-model="fugitive.perfect_burn" type="select" v-slot="{ perfect_burn, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Perfect Burn" required>
+                            <el-switch
+                                :model-value="perfect_burn"
                                 v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="CO2_emission_ton_year" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emission Ton/year" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
+                                class="ml-2"
+                                style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+                            />
                             </el-form-item>
                             </Field>
                         </el-col>
@@ -204,30 +154,12 @@ export default {
         return {
             loading:false,
             fugitive: {
-                file: ''
+                file: '',
+                perfect_burn: true,
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
+            pabrik_options: [],
+            sumberemisi_options: [],
         }
     },
     setup() {
@@ -235,18 +167,17 @@ export default {
             tahun: yup.string().required().label('Tahun'),
             pabrik: yup.string().required().label('Pabrik'),
             sumber_emisi: yup.string().required().label('Sumber Emisi'),
-            combustion_eficiency: yup.number().required().label('Combustion Eficiency'),
-            conversion_factor: yup.number().required().label('Conversion Factor'),
-            stoichiometric_mass_factor: yup.number().required().label('Stoichiometric Mass Factor'),
             volume_of_methane: yup.number().required().label('Volume Of Methane'),
-            CO2_emission_gg_year: yup.number().required().label('CO2 Emission gg/year'),
-            CO2_emission_ton_year: yup.number().required().label('CO2 Emission Ton/year')
+            perfect_burn: yup.string().required().label('Perfect Burn'),
             });
         return {
             schema,
         };
     },
     created() {
+        this.fetchTahun();
+        this.fetchPabrik();
+        this.fetchSumberEmisi();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -298,6 +229,33 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchPabrik() {
+            axios.get(`/api/valuelist/getpabrikdata`)
+                .then(response => {
+                    this.pabrik_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchSumberEmisi() {
+            axios.get(`/api/valuelist/getsumberemisidata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

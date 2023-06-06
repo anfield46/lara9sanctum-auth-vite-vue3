@@ -19,11 +19,8 @@ class ImportPergudangan implements ToModel, WithHeadingRow
         if ($row['tahun'] != null) {
             return new Pergudangan([
                 'tahun' => $row['tahun'],
-                'sumber_emisi' => $row['sumber_emisi'],
+                'id_sumber_emisi' => $row['id_sumber_emisi'],
                 'consumption' => $row['consumption'],
-                'CO2_emission_factor' => $row['co2_emission_factor'],
-                'CO2_emission' => $row['co2_emission'],
-                'CO2eq' => $row['co2eq'],
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ]);

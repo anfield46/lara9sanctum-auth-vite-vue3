@@ -33,8 +33,71 @@
               class="scroll-y me-n7 pe-7"
               id="kt_edit_modal_gas_alam_scroll"
             >
-                
+
+                    <input :value="text" style="border:white;"/>
+
                     <el-row :gutter="20">
+                        <el-col :span="12">
+                            <Field name="tahun" type="select" v-model="gasalam.tahun" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Tahun" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in tahun_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                        <el-col :span="12">
+                            <Field name="id_pabrik" type="select" v-model="gasalam.id_pabrik" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Pabrik" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in pabrik_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :gutter="20">
+                        <el-col :span="12">
+                            <Field name="id_sumber_emisi" type="select" v-model="gasalam.id_sumber_emisi" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Nama Sumber Emisi" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in sumberemisi_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+
+                        <el-col :span="7">
+                            <Field name="consumption_mmbtu" type="number" v-model="gasalam.consumption_mmbtu" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Consumption MMBTU" required>
+                                <el-input
+                                placeholder="0"
+                                v-bind="field"
+                                :validate-event="false"
+                                :model-value="value"
+                                />
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                    </el-row>
+                
+                    <!-- <el-row :gutter="20">
                         <el-col :span="12">
                             <Field name="tahun" type="select" v-model="gasalam.tahun" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Tahun" required>
@@ -212,7 +275,7 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
+                    </el-row> -->
                 
             </div>
             <!--end::Scroll-->
@@ -263,58 +326,39 @@ export default {
             gasalam: {
                 id: "",
                 tahun: "",
-                pabrik: "tes",
-                sumber_emisi: "",
-                consumption_mmbtu: "",
-                consumption_tj: "",
-                conversion_on_factor: "",
-                co2_emissions_factor: "",
-                co2_emissions: "",
-                ch4_emissions_factor: "",
-                ch4_emissions: "",
-                n2o_emissions_factor: "",
-                n2o_emissions: "",
-                co2eq: "",
+                id_pabrik: 0,
+                id_sumber_emisi: 0,
+                consumption_mmbtu: 0,
+                // consumption_tj: "",
+                // conversion_on_factor: "",
+                // co2_emissions_factor: "",
+                // co2_emissions: "",
+                // ch4_emissions_factor: "",
+                // ch4_emissions: "",
+                // n2o_emissions_factor: "",
+                // n2o_emissions: "",
+                // co2eq: "",
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
+            pabrik_options: [],
+            sumberemisi_options: [],
         }
     },
     setup() {
         const schema = yup.object({
             tahun: yup.string().required().label('Tahun'),
-            pabrik: yup.string().required().label('Pabrik'),
-            sumber_emisi: yup.string().required().label('Nama Sumber Emisi'),
+            id_pabrik: yup.string().required().label('Pabrik'),
+            id_sumber_emisi: yup.string().required().label('Nama Sumber Emisi'),
             consumption_mmbtu: yup.number().required().label('Consumption MMBTU'),
-            conversion_factor: yup.number().required().label('Conversion on Factor(TJ/MMBTU)'),
-            consumption_tj: yup.number().required().label('Consumption TJ'),
-            co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
-            co2_emissions: yup.number().required().label('CO2 Emissions'),
-            ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
-            ch4_emissions: yup.number().required().label('CH4 Emissions'),
-            n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
-            n2o_emissions: yup.number().required().label('N2O Emissions'),
-            co2eq: yup.number().required().label('CO2eq'),
+            // conversion_factor: yup.number().required().label('Conversion on Factor(TJ/MMBTU)'),
+            // consumption_tj: yup.number().required().label('Consumption TJ'),
+            // co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
+            // co2_emissions: yup.number().required().label('CO2 Emissions'),
+            // ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
+            // ch4_emissions: yup.number().required().label('CH4 Emissions'),
+            // n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
+            // n2o_emissions: yup.number().required().label('N2O Emissions'),
+            // co2eq: yup.number().required().label('CO2eq'),
             });
         return {
             schema,
@@ -325,22 +369,25 @@ export default {
             handler(val, old) {
                 this.gasalam.id = val.id;
                 this.gasalam.tahun = val.tahun;
-                this.gasalam.pabrik = val.pabrik;
-                this.gasalam.sumber_emisi = val.sumber_emisi;
+                this.gasalam.id_pabrik = val.id_pabrik;
+                this.gasalam.id_sumber_emisi = val.id_sumber_emisi;
                 this.gasalam.consumption_mmbtu = val.consumption_mmbtu;
-                this.gasalam.consumption_tj = val.consumption_tj;
-                this.gasalam.conversion_on_factor = val.conversion_factor;
-                this.gasalam.co2_emissions_factor = val.CO2_emissions_factor;
-                this.gasalam.co2_emissions = val.CO2_emissions;
-                this.gasalam.ch4_emissions_factor = val.CH4_emissions_factor;
-                this.gasalam.ch4_emissions = val.CH4_emissions;
-                this.gasalam.n2o_emissions_factor = val.N2O_emissions_factor;
-                this.gasalam.n2o_emissions = val.N2O_emissions;
-                this.gasalam.co2eq = val.CO2eq;
+                // this.gasalam.consumption_tj = val.consumption_tj;
+                // this.gasalam.conversion_on_factor = val.conversion_factor;
+                // this.gasalam.co2_emissions_factor = val.CO2_emissions_factor;
+                // this.gasalam.co2_emissions = val.CO2_emissions;
+                // this.gasalam.ch4_emissions_factor = val.CH4_emissions_factor;
+                // this.gasalam.ch4_emissions = val.CH4_emissions;
+                // this.gasalam.n2o_emissions_factor = val.N2O_emissions_factor;
+                // this.gasalam.n2o_emissions = val.N2O_emissions;
+                // this.gasalam.co2eq = val.CO2eq;
             },
         },
     },
     created() {
+        this.fetchTahun();
+        this.fetchPabrik();
+        this.fetchSumberEmisi();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -392,6 +439,33 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchPabrik() {
+            axios.get(`/api/valuelist/getpabrikdata`)
+                .then(response => {
+                    this.pabrik_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchSumberEmisi() {
+            axios.get(`/api/valuelist/getsumberemisidata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

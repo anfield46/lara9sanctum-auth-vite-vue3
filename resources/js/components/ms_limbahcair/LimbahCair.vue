@@ -93,21 +93,43 @@
           :fixed="true"
           />
           <DxColumn
-          data-field="type_of_treatment_or_discharge_pathway"
+          data-field="EP_A"
           data-type="string"
-          fixed-position="left"
-          :fixed="true"
+          />
+          <DxColumn
+          data-field="EP_B"
+          data-type="string"
+          />
+          <DxColumn
+          data-field="Pi"
+          data-type="string"
+          />
+          <DxColumn
+          data-field="Wi"
+          data-type="string"
+          />
+          <DxColumn
+          data-field="CODi_kgperm3"
+          data-type="string"
+          />
+          <DxColumn
+          data-field="CODi"
+          data-type="string"
           />
           <DxColumn
           data-field="TOWi"
           data-type="string"
           />
           <DxColumn
-          data-field="Si"
+          data-field="B0"
           data-type="string"
           />
           <DxColumn
-          data-field="EFi"
+          data-field="MCFi"
+          data-type="string"
+          />
+          <DxColumn
+          data-field="Si"
           data-type="string"
           />
           <DxColumn

@@ -16,7 +16,7 @@ class PergudanganController extends Controller
     /////////////////////////// master data
     public function loadpergudangan(Request $request, Core $devextreme) //dx grid
     {
-        $pergudangan = DB::table('ms_pergudangan as a')
+        $pergudangan = DB::table('vw_pergudangan as a')
             ->select('a.*');
         $data = $devextreme->data($pergudangan, $request, 'id');
         $datax1 = array();
@@ -24,11 +24,15 @@ class PergudanganController extends Controller
             $datax1[] = array(
                 'id' => Core::encodex($d->id),
                 'tahun' => $d->tahun,
+                'id_sumber_emisi' => $d->id_sumber_emisi,
                 'sumber_emisi' => $d->sumber_emisi,
                 'consumption' => $d->consumption,
-                'CO2_emission_factor' => $d->CO2_emission_factor,
-                'CO2_emission' => $d->CO2_emission,
-                'CO2eq' => $d->CO2eq
+                'assumption_consumption_perm2' => $d->assumption_consumption_perm2,
+                'assumption_consumption_per12jam' => $d->assumption_consumption_per12jam,
+                'energy_consumption' => $d->energy_consumption,
+                'CO2_emission_factor' => $d->co2_emission,
+                'CO2_emission' => $d->co2_emission,
+                'CO2eq' => $d->co2eq
             );
         }
         return response()->json(
@@ -50,18 +54,15 @@ class PergudanganController extends Controller
     // add pergudangan
     public function add(Request $request)
     {
-        $existing = Pergudangan::where('tahun', $request->tahun)->where('sumber_emisi', $request->sumber_emisi)->first();
+        $existing = Pergudangan::where('tahun', $request->tahun)->where('id_sumber_emisi', $request->id_sumber_emisi)->first();
         if ($existing) {
             return response()->json(array('messageinput'   => '0', 'message' => 'Data Gagal ditambahkan, master data sudah tersedia!'));
         }
 
         $pergudangan = new Pergudangan([
             'tahun' => $request->tahun,
-            'sumber_emisi' => $request->sumber_emisi,
+            'id_sumber_emisi' => $request->sumber_emisi,
             'consumption' => $request->consumption,
-            'CO2_emission_factor' => $request->co2_emission_factor,
-            'CO2_emission' => $request->co2_emission,
-            'CO2eq' => $request->co2eq,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ]);

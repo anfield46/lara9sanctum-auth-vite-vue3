@@ -19,6 +19,11 @@ use App\Http\Controllers\API\DistribusiKapalController;
 use App\Http\Controllers\API\NpkUreaController;
 use App\Http\Controllers\API\SampahDomestikController;
 
+use App\Http\Controllers\API\BaselineController;
+use App\Http\Controllers\API\ValuelistController;
+use App\Http\Controllers\API\RencanaController;
+use App\Http\Controllers\API\RealisasiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,6 +37,45 @@ use App\Http\Controllers\API\SampahDomestikController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['prefix' => 'valuelist', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/gettahundata', [ValuelistController::class, 'gettahundata']);
+    Route::get('/getpabrikdata', [ValuelistController::class, 'getpabrikdata']);
+    Route::get('/getsumberemisidata', [ValuelistController::class, 'getsumberemisidata']);
+    Route::get('/gettipebatubaradata', [ValuelistController::class, 'gettipebatubaradata']);
+    Route::get('/getcategorydata', [ValuelistController::class, 'getcategorydata']);
+    Route::get('/getprogramnetzerodata', [ValuelistController::class, 'getprogramnetzerodata']);
+    Route::get('/getaircoolingsystemdata', [ValuelistController::class, 'getaircoolingsystemdata']);
+});
+
+Route::group(['prefix' => 'baseline', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('/loadbaseline', [BaselineController::class, 'loadbaseline']);
+    Route::post('add', [BaselineController::class, 'add']);
+    Route::post('import', [BaselineController::class, 'import']);
+    Route::get('edit/{id}', [BaselineController::class, 'edit']);
+    Route::post('update/{id}', [BaselineController::class, 'update']);
+    Route::delete('delete/{id}', [BaselineController::class, 'delete']);
+    Route::get('/getcategorydata', [BaselineController::class, 'getcategorydata']);
+    Route::get('/baseline', [BaselineController::class, 'baseline']);
+});
+
+Route::group(['prefix' => 'rencana', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('/loadrencana', [RencanaController::class, 'loadrencana']);
+    Route::post('add', [RencanaController::class, 'add']);
+    Route::post('import', [RencanaController::class, 'import']);
+    Route::get('edit/{id}', [RencanaController::class, 'edit']);
+    Route::post('update/{id}', [RencanaController::class, 'update']);
+    Route::delete('delete/{id}', [RencanaController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'realisasi', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('/loadrealisasi', [RealisasiController::class, 'loadrealisasi']);
+    Route::post('add', [RealisasiController::class, 'add']);
+    Route::post('import', [RealisasiController::class, 'import']);
+    Route::get('edit/{id}', [RealisasiController::class, 'edit']);
+    Route::post('update/{id}', [RealisasiController::class, 'update']);
+    Route::delete('delete/{id}', [RealisasiController::class, 'delete']);
 });
 
 Route::group(['prefix' => 'gasalam', 'middleware' => 'auth:sanctum'], function () {

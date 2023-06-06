@@ -32,12 +32,12 @@
 				<div class="d-flex align-items-center pt-4 pb-7 pt-lg-1 pb-lg-2">
 					<!--begin::Button-->
           <button type="button" class="btn btn-sm btn-primary fw-bold me-3" @click="importGasAlam">
-            <span><i class="cursor-pointer dx-icon-plus"></i>Import Data</span>
+            <span>Import Data</span>
           </button>
 					<!--end::Button-->
 					<!--begin::Button-->
 					<button type="button" class="btn btn-sm btn-primary fw-bold me-3" @click="addGasAlam">
-            <span><i class="cursor-pointer dx-icon-plus"></i>Add Data</span>
+            <span>Add Data</span>
           </button>
 					<!--end::Button-->
 				</div>

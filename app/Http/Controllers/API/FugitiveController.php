@@ -16,7 +16,7 @@ class FugitiveController extends Controller
     /////////////////////////// master data
     public function loadfugitive(Request $request, Core $devextreme) //dx grid
     {
-        $fugitive = DB::table('ms_fugitive as a')
+        $fugitive = DB::table('vw_fugitive as a')
             ->select('a.*');
         $data = $devextreme->data($fugitive, $request, 'id');
         $datax1 = array();
@@ -27,11 +27,11 @@ class FugitiveController extends Controller
                 'pabrik' => $d->pabrik,
                 'sumber_emisi' => $d->sumber_emisi,
                 'combustion_eficiency' => $d->combustion_eficiency,
-                'conversion_factor' => $d->conversion_factor,
+                'conversion_factor' => $d->conversion_on_factor,
                 'stoichiometric_mass_factor' => $d->stoichiometric_mass_factor,
                 'volume_of_methane' => $d->volume_of_methane,
-                'CO2_emission_gg_year' => $d->CO2_emission_gg_year,
-                'CO2_emission_ton_year' => $d->CO2_emission_ton_year
+                'CO2_emission_gg_year' => $d->co2_emission_gg_year,
+                'CO2_emission_ton_year' => $d->co2_emission_ton_year
             );
         }
         return response()->json(
@@ -53,21 +53,20 @@ class FugitiveController extends Controller
     // add fugitive
     public function add(Request $request)
     {
-        $existing = Fugitive::where('tahun', $request->tahun)->where('sumber_emisi', $request->sumber_emisi)->first();
+        $existing = Fugitive::where('tahun', $request->tahun)
+                                ->where('id_sumber_emisi', $request->id_sumber_emisi)
+                                ->where('perfect_burn', $request->perfect_burn)
+                                ->first();
         if ($existing) {
             return response()->json(array('messageinput'   => '0', 'message' => 'Data Gagal ditambahkan, master data sudah tersedia!'));
         }
 
         $fugitive = new Fugitive([
             'tahun' => $request->tahun,
-            'pabrik' => $request->pabrik,
-            'sumber_emisi' => $request->sumber_emisi,
-            'combustion_eficiency' => $request->combustion_eficiency,
-            'conversion_factor' => $request->conversion_factor,
-            'stoichiometric_mass_factor' => $request->stoichiometric_mass_factor,
+            'id_pabrik' => $request->pabrik,
+            'id_sumber_emisi' => $request->sumber_emisi,
+            'perfect_burn' => $request->perfect_burn,
             'volume_of_methane' => $request->volume_of_methane,
-            'CO2_emission_gg_year' => $request->CO2_emission_gg_year,
-            'CO2_emission_ton_year' => $request->CO2_emission_ton_year,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ]);

@@ -78,33 +78,6 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                        <el-col :span="12">
-                            <Field name="emission_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Emission Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="annual_co2eq" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Annual CO2eq" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
                     </el-row>
                 
             </div>
@@ -154,28 +127,7 @@ export default {
             NpkUrea: {
                 file: ''
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
             jenis_options: [
               {
                 value: 'NPK',
@@ -193,14 +145,13 @@ export default {
             tahun: yup.string().required().label('Tahun'),
             jenis: yup.string().required().label('Jenis'),
             annual_amount: yup.number().required().label('Annual Amount'),
-            emission_factor: yup.number().required().label('Emission Factor'),
-            annual_co2eq: yup.number().required().label('Annual CO2eq'),
             });
         return {
             schema,
         };
     },
     created() {
+        this.fetchTahun();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -252,6 +203,15 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

@@ -19,18 +19,9 @@ class ImportIndirectEmissionKdm implements ToModel, WithHeadingRow
         if ($row['tahun'] != null) {
             return new IndirectEmissionKdm([
                 'tahun' => $row['tahun'],
-                'pabrik' => $row['pabrik'],
-                'sumber_emisi' => $row['sumber_emisi'],
+                'id_pabrik' => $row['id_pabrik'],
+                'id_sumber_emisi' => $row['id_sumber_emisi'],
                 'consumption_mmbtu' => $row['consumption_mmbtu'],
-                'consumption_tj' => $row['consumption_tj'],
-                'conversion_factor' => $row['conversion_factor'],
-                'CO2_emissions_factor' => $row['co2_emissions_factor'],
-                'CO2_emissions' => $row['co2_emissions'],
-                'CH4_emissions_factor' => $row['ch4_emissions_factor'],
-                'CH4_emissions' => $row['ch4_emissions'],
-                'N2O_emissions_factor' => $row['n2o_emissions_factor'],
-                'N2O_emissions' => $row['n2o_emissions'],
-                'CO2eq' => $row['co2eq'],
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id,
             ]);

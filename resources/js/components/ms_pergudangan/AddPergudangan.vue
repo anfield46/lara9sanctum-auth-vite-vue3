@@ -49,68 +49,28 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="sumber_emisi" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Sumber Emisi" required>
-                                <el-input
-                                placeholder="sumber emisi"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                            <Field name="sumber_emisi" type="select" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Nama Sumber Emisi" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in sumberemisi_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
+                    </el-row>
+
+                    <el-row :gutter="20">
                         <el-col :span="12">
                             <Field name="consumption" type="number" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Consumption" required>
                                 <el-input
                                 placeholder="consumption"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="co2_emission_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emission Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="co2_emission" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emission" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="co2eq" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2eq" required>
-                                <el-input
-                                placeholder="0"
                                 v-bind="field"
                                 :validate-event="false"
                                 :model-value="value"
@@ -167,28 +127,8 @@ export default {
             Pergudangan: {
                 file: ''
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
+            sumberemisi_options: [],
         }
     },
     setup() {
@@ -196,15 +136,14 @@ export default {
             tahun: yup.string().required().label('Tahun'),
             sumber_emisi: yup.string().required().label('Sumber Emisi'),
             consumption: yup.number().required().label('Consumption'),
-            co2_emission_factor: yup.number().required().label('CO2 Emission Factor'),
-            co2_emission: yup.number().required().label('CO2 Emission'),
-            co2eq: yup.number().required().label('CO2eq'),
             });
         return {
             schema,
         };
     },
     created() {
+        this.fetchTahun();
+        this.fetchSumberEmisi();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -256,6 +195,24 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchSumberEmisi() {
+            axios.get(`/api/valuelist/getsumberemisidata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

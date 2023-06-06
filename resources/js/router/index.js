@@ -12,6 +12,11 @@ const DahboardLayout = () => import('../components/layouts/Default.vue')
 
 /* Authenticated Component */
 const Dashboard = () => import('../components/Dashboard.vue')
+const Faq = () => import('../components/Faq.vue')
+const Baseline = () => import('../components/baseline/Baseline.vue')
+const Rencana = () => import('../components/rencana/Rencana.vue')
+const Realisasi = () => import('../components/realisasi/Realisasi.vue')
+
 const GasAlam = () => import('../components/ms_gasalam/GasAlam.vue')
 const Coal = () => import('../components/ms_coal/Coal.vue')
 const IPPU = () => import('../components/ms_ippu/Ippu.vue')
@@ -28,6 +33,20 @@ const DistribusiKapal = () => import('../components/ms_distribusikapal/Distribus
 const NpkUrea = () => import('../components/ms_npkurea/NpkUrea.vue')
 const SampahDomestik = () => import('../components/ms_sampahdomestik/SampahDomestik.vue')
 /* Authenticated Component */
+
+// Define a middleware-like function for admin routes
+const isAdmin = (to, from, next) => {
+  // Check if the user is authenticated as an admin
+  const isAdmin = store.state.auth.user.role // Check if the user is an admin
+
+  if (isAdmin == 'admin') {
+    // User is an admin, allow access to the route
+    next();
+  } else {
+    // User is not an admin, redirect to a different route or show an error message
+    next({ name: "dashboard" })
+  }
+};
 
 const routes = [
     {
@@ -51,9 +70,9 @@ const routes = [
     {
         path: "/",
         component: DahboardLayout,
-        meta: {
-            middleware: "auth"
-        },
+        // meta: {
+        //     middleware: isAdmin // Attach the isAdmin middleware-like function to the route's meta field
+        // },
         children: [
             {
                 name: "dashboard",
@@ -61,6 +80,40 @@ const routes = [
                 component: Dashboard,
                 meta: {
                     title: `Dashboard`
+                }
+            },
+            {
+                name: "faq",
+                path: '/',
+                component: Faq,
+                meta: {
+                    title: `Faq`
+                }
+            },
+            {
+                name: "baseline",
+                path: '/baseline',
+                component: Baseline,
+                meta: {
+                    title: `Baseline`
+                }
+            },
+            {
+                name: "rencana",
+                path: '/rencana',
+                component: Rencana,
+                meta: {
+                    title: `Rencana`,
+                    // middleware: isAdmin
+                }
+            },
+            {
+                name: "realisasi",
+                path: '/realisasi',
+                component: Realisasi,
+                meta: {
+                    title: `Realisasi`,
+                    // middleware: isAdmin
                 }
             },
             {
@@ -194,14 +247,22 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title
-    if (to.meta.middleware == "guest") {
+    if (to.meta.middleware == "guest") { // page login / register
+        console.log('tes');
         if (store.state.auth.authenticated) {
             next({ name: "dashboard" })
         }
         next()
     } else {
         if (store.state.auth.authenticated) {
-            next()
+            if (to.meta.middleware) {
+                // console.log(to.meta.middleware);
+                // If a middleware-like function is defined in the route's meta field, execute it
+                to.meta.middleware(to, from, next);
+            } else {
+                // If no middleware-like function is defined, proceed to the next route
+                next();
+            }
         } else {
             next({ name: "login" })
         }

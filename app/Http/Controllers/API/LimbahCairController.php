@@ -16,21 +16,28 @@ class LimbahCairController extends Controller
     /////////////////////////// master data
     public function loadlimbahcair(Request $request, Core $devextreme) //dx grid
     {
-        $limbahcair = DB::table('ms_limbah_cair as a')
+        $limbahcair = DB::table('vw_limbah_cair as a')
             ->select('a.*');
         $data = $devextreme->data($limbahcair, $request, 'id');
         $datax1 = array();
         foreach ($data['datax'] as $d) {
             $datax1[] = array(
                 'id' => Core::encodex($d->id),
-                'industrial_sector' => $d->industrial_sector,
-                'type_of_treatment_or_discharge_pathway' => $d->type_of_treatment_or_discharge_pathway,
+                'industrial_sector' => $d->tahun,
+                'EP_A' => $d->EP_A,
+                'EP_B' => $d->EP_B,
+                'Pi' => $d->Pi,
+                'Wi' => $d->Wi,
+                'CODi_kgperm3' => $d->CODi_kgperm3,
+                'CODi' => $d->CODi,
                 'TOWi' => $d->TOWi,
+                'B0' => $d->B0,
+                'MCFi' => $d->MCFi,
                 'Si' => $d->Si,
                 'EFi' => $d->EFi,
                 'Ri' => $d->Ri,
                 'CH4' => $d->CH4,
-                'CO2eq' => $d->CO2eq,
+                'CO2eq' => $d->ton_CO2eq
             );
         }
         return response()->json(
@@ -52,20 +59,17 @@ class LimbahCairController extends Controller
     // add limbahcair
     public function add(Request $request)
     {
-        $existing = LimbahCair::where('industrial_sector', $request->industrial_sector)->where('type_of_treatment_or_discharge_pathway', $request->type_of_treatment_or_discharge_pathway)->first();
+        $existing = LimbahCair::where('industrial_sector', $request->industrial_sector)->first();
         if ($existing) {
             return response()->json(array('messageinput'   => '0', 'message' => 'Data Gagal ditambahkan, master data sudah tersedia!'));
         }
 
         $limbahcair = new LimbahCair([
             'industrial_sector' => $request->industrial_sector,
-            'type_of_treatment_or_discharge_pathway' => $request->type_of_treatment_or_discharge_pathway,
-            'TOWi' => $request->TOWi,
-            'Si' => $request->Si,
-            'EFi' => $request->EFi,
-            'Ri' => $request->Ri,
-            'CH4' => $request->CH4,
-            'CO2eq' => $request->CO2eq,
+            'EP_A' => $request->EP_A,
+            'EP_B' => $request->EP_B,
+            'Pi' => $request->Pi,
+            'CODi' => $request->CODi,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ]);

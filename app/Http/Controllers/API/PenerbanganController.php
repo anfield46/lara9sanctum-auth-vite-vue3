@@ -16,7 +16,7 @@ class PenerbanganController extends Controller
     /////////////////////////// master data
     public function loadpenerbangan(Request $request, Core $devextreme) //dx grid
     {
-        $penerbangan = DB::table('ms_penerbangan as a')
+        $penerbangan = DB::table('vw_penerbangan as a')
             ->select('a.*');
         $data = $devextreme->data($penerbangan, $request, 'id');
         $datax1 = array();
@@ -29,16 +29,16 @@ class PenerbanganController extends Controller
                 'jam_terbang' => $d->jam_terbang,
                 'konsumsi_bahan_bakar' => $d->konsumsi_bahan_bakar,
                 'energy_consumption_liter' => $d->energy_consumption_liter,
-                'conversion_factor' => $d->conversion_factor,
-                'energy_consumption_tj' => $d->energy_consumption_tj,
-                'CO2_emission_factor' => $d->CO2_emission_factor,
-                'CO2_emission' => $d->CO2_emission,
-                'CH4_emission_factor' => $d->CH4_emission_factor,
-                'CH4_emission' => $d->CH4_emission,
-                'N2O_emission_factor' => $d->N2O_emission_factor,
-                'N2O_CO2_emission' => $d->N2O_CO2_emission,
-                'gg_CO2eq' => $d->gg_CO2eq,
-                'ton_CO2eq' => $d->ton_CO2eq,
+                'conversion_factor' => $d->conversion_on_factor,
+                'energy_consumption_tj' => $d->consumption_tj,
+                'CO2_emission_factor' => $d->co2_emission_factor,
+                'CO2_emission' => $d->co2_emission,
+                'CH4_emission_factor' => $d->ch4_emission_factor,
+                'CH4_emission' => $d->ch4_emission,
+                'N2O_emission_factor' => $d->n2o_emission_factor,
+                'N2O_CO2_emission' => $d->n2o_emission,
+                'gg_CO2eq' => $d->gg_co2eq,
+                'ton_CO2eq' => $d->ton_co2eq,
             );
         }
         return response()->json(
@@ -60,7 +60,10 @@ class PenerbanganController extends Controller
     // add penerbangan
     public function add(Request $request)
     {
-        $existing = Penerbangan::where('tahun', $request->tahun)->first();
+        $existing = Penerbangan::where('tahun', $request->tahun)
+                                    ->where('jenis_pesawat', $request->jenis_pesawat)
+                                    ->where('bahan_bakar', $request->bahan_bakar)
+                                    ->first();
         if ($existing) {
             return response()->json(array('messageinput'   => '0', 'message' => 'Data Gagal ditambahkan, master data sudah tersedia!'));
         }
@@ -72,16 +75,6 @@ class PenerbanganController extends Controller
             'jam_terbang' => $request->jam_terbang,
             'konsumsi_bahan_bakar' => $request->konsumsi_bahan_bakar,
             'energy_consumption_liter' => $request->energy_consumption_liter,
-            'conversion_factor' => $request->conversion_factor,
-            'energy_consumption_tj' => $request->energy_consumption_tj,
-            'CO2_emission_factor' => $request->co2_emission_factor,
-            'CO2_emission' => $request->co2_emission,
-            'CH4_emission_factor' => $request->ch4_emission_factor,
-            'CH4_emission' => $request->ch4_emission,
-            'N2O_emission_factor' => $request->n2o_emission_factor,
-            'N2O_CO2_emission' => $request->n2o_co2_emission,
-            'gg_CO2eq' => $request->gg_co2eq,
-            'ton_CO2eq' => $request->ton_co2eq,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ]);

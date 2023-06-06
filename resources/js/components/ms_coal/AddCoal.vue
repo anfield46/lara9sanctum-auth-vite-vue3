@@ -34,6 +34,8 @@
               id="kt_add_modal_coal_scroll"
             >
                 
+                    <input :value="text" style="border:white;"/>
+
                     <el-row :gutter="20">
                         <el-col :span="12">
                             <Field name="tahun" type="select" v-slot="{ value, field, errorMessage }">
@@ -49,9 +51,70 @@
                             </el-form-item>
                             </Field>
                         </el-col>
+                        <el-col :span="12">
+                            <Field name="pabrik" type="select" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Pabrik" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in pabrik_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
                     </el-row>
 
                     <el-row :gutter="20">
+                        <el-col :span="12">
+                            <Field name="sumber_emisi" type="select" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Nama Sumber Emisi" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in sumberemisi_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+
+                        <el-col :span="12">
+                            <Field name="tipe_batubara" type="select" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Tipe Batubara" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in tipebatubara_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :gutter="20">
+                        <el-col :span="7">
+                            <Field name="consumption_mmbtu" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Consumption MMBTU" required>
+                                <el-input
+                                placeholder="0"
+                                v-bind="field"
+                                :validate-event="false"
+                                :model-value="value"
+                                />
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                    </el-row>
+
+                    <!-- <el-row :gutter="20">
                         <el-col :span="8">
                             <Field name="pabrik" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Pabrik" required>
@@ -225,7 +288,7 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
+                    </el-row> -->
                 
             </div>
             <!--end::Scroll-->
@@ -274,28 +337,10 @@ export default {
             coal: {
                 file: ''
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
+            pabrik_options: [],
+            sumberemisi_options: [],
+            tipebatubara_options: [],
         }
     },
     setup() {
@@ -305,21 +350,25 @@ export default {
             sumber_emisi: yup.string().required().label('Nama Sumber Emisi'),
             tipe_batubara: yup.string().required().label('Tipe Batubara'),
             consumption_mmbtu: yup.number().required().label('Consumption MMBTU'),
-            conversion_on_factor: yup.number().required().label('Conversion on Factor(TJ/MMBTU)'),
-            consumption_tj: yup.number().required().label('Consumption TJ'),
-            co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
-            co2_emissions: yup.number().required().label('CO2 Emissions'),
-            ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
-            ch4_emissions: yup.number().required().label('CH4 Emissions'),
-            n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
-            n2o_emissions: yup.number().required().label('N2O Emissions'),
-            co2eq: yup.number().required().label('CO2eq'),
+            // conversion_on_factor: yup.number().required().label('Conversion on Factor(TJ/MMBTU)'),
+            // consumption_tj: yup.number().required().label('Consumption TJ'),
+            // co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
+            // co2_emissions: yup.number().required().label('CO2 Emissions'),
+            // ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
+            // ch4_emissions: yup.number().required().label('CH4 Emissions'),
+            // n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
+            // n2o_emissions: yup.number().required().label('N2O Emissions'),
+            // co2eq: yup.number().required().label('CO2eq'),
             });
         return {
             schema,
         };
     },
     created() {
+        this.fetchTahun();
+        this.fetchPabrik();
+        this.fetchSumberEmisi();
+        this.fetchTipeBatubara();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -371,6 +420,42 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchPabrik() {
+            axios.get(`/api/valuelist/getpabrikdata`)
+                .then(response => {
+                    this.pabrik_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchSumberEmisi() {
+            axios.get(`/api/valuelist/getsumberemisidata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchTipeBatubara() {
+            axios.get(`/api/valuelist/gettipebatubaradata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

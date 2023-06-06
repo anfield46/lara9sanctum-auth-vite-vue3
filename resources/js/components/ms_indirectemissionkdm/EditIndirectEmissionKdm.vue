@@ -33,14 +33,30 @@
               class="scroll-y me-n7 pe-7"
               id="kt_edit_modal_indirectemissionkdm_scroll"
             >
-                
+
+                    <input :value="text" style="border:white;"/>
+
                     <el-row :gutter="20">
                         <el-col :span="12">
                             <Field name="tahun" type="select" v-model="indirectemissionkdm.tahun" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Tahun" required>
-                                <el-select v-bind="field" :validate-event="true" :model-value="value" :filterable="true" placeholder="Select">
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
                                 <el-option
                                     v-for="item in tahun_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                        <el-col :span="12">
+                            <Field name="id_pabrik" type="select" v-model="indirectemissionkdm.id_pabrik" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Pabrik" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in pabrik_options"
                                     :key="item.value"
                                     :label="item.label"
                                     :value="item.value"
@@ -53,156 +69,23 @@
 
                     <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="pabrik" v-model="indirectemissionkdm.pabrik" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Pabrik" required>
-                                <el-input
-                                placeholder="Nama Pabrik"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-
-                        <el-col :span="12">
-                            <Field name="sumber_emisi" v-model="indirectemissionkdm.sumber_emisi" v-slot="{ value, field, errorMessage }">
+                            <Field name="id_sumber_emisi" type="select" v-model="indirectemissionkdm.id_sumber_emisi" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Nama Sumber Emisi" required>
-                                <el-input
-                                placeholder="Sumber Emisi"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in sumberemisi_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
 
-                    <el-row :gutter="20">
                         <el-col :span="7">
                             <Field name="consumption_mmbtu" type="number" v-model="indirectemissionkdm.consumption_mmbtu" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Consumption MMBTU" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="10">
-                            <Field name="conversion_factor" type="number" v-model="indirectemissionkdm.conversion_on_factor" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Conversion on Factor(TJ/MMBTU)" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="7">
-                            <Field name="consumption_tj" type="number" v-model="indirectemissionkdm.consumption_tj" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Consumption TJ" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="co2_emissions_factor" type="number" v-model="indirectemissionkdm.co2_emissions_factor" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emissions Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="co2_emissions" type="number" v-model="indirectemissionkdm.co2_emissions" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emissions" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="ch4_emissions_factor" type="number" v-model="indirectemissionkdm.ch4_emissions_factor" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CH4 Emissions Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="ch4_emissions" type="number" v-model="indirectemissionkdm.ch4_emissions" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CH4 Emissions" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="n2o_emissions_factor" type="number" v-model="indirectemissionkdm.n2o_emissions_factor" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="N2O Emissions Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="n2o_emissions" type="number" v-model="indirectemissionkdm.n2o_emissions" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="N2O Emissions" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="co2eq" type="number" v-model="indirectemissionkdm.co2eq" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2eq" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -263,41 +146,13 @@ export default {
             indirectemissionkdm: {
                 id: "",
                 tahun: "",
-                pabrik: "tes",
+                pabrik: "0",
                 sumber_emisi: "",
                 consumption_mmbtu: "",
-                consumption_tj: "",
-                conversion_on_factor: "",
-                co2_emissions_factor: "",
-                co2_emissions: "",
-                ch4_emissions_factor: "",
-                ch4_emissions: "",
-                n2o_emissions_factor: "",
-                n2o_emissions: "",
-                co2eq: "",
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
+            pabrik_options: [],
+            sumberemisi_options: [],
         }
     },
     setup() {
@@ -306,15 +161,6 @@ export default {
             pabrik: yup.string().required().label('Pabrik'),
             sumber_emisi: yup.string().required().label('Nama Sumber Emisi'),
             consumption_mmbtu: yup.number().required().label('Consumption MMBTU'),
-            conversion_factor: yup.number().required().label('Conversion on Factor(TJ/MMBTU)'),
-            consumption_tj: yup.number().required().label('Consumption TJ'),
-            co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
-            co2_emissions: yup.number().required().label('CO2 Emissions'),
-            ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
-            ch4_emissions: yup.number().required().label('CH4 Emissions'),
-            n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
-            n2o_emissions: yup.number().required().label('N2O Emissions'),
-            co2eq: yup.number().required().label('CO2eq'),
             });
         return {
             schema,
@@ -325,22 +171,16 @@ export default {
             handler(val, old) {
                 this.indirectemissionkdm.id = val.id;
                 this.indirectemissionkdm.tahun = val.tahun;
-                this.indirectemissionkdm.pabrik = val.pabrik;
-                this.indirectemissionkdm.sumber_emisi = val.sumber_emisi;
+                this.indirectemissionkdm.id_pabrik = val.id_pabrik;
+                this.indirectemissionkdm.id_sumber_emisi = val.id_sumber_emisi;
                 this.indirectemissionkdm.consumption_mmbtu = val.consumption_mmbtu;
-                this.indirectemissionkdm.consumption_tj = val.consumption_tj;
-                this.indirectemissionkdm.conversion_on_factor = val.conversion_factor;
-                this.indirectemissionkdm.co2_emissions_factor = val.CO2_emissions_factor;
-                this.indirectemissionkdm.co2_emissions = val.CO2_emissions;
-                this.indirectemissionkdm.ch4_emissions_factor = val.CH4_emissions_factor;
-                this.indirectemissionkdm.ch4_emissions = val.CH4_emissions;
-                this.indirectemissionkdm.n2o_emissions_factor = val.N2O_emissions_factor;
-                this.indirectemissionkdm.n2o_emissions = val.N2O_emissions;
-                this.indirectemissionkdm.co2eq = val.CO2eq;
             },
         },
     },
     created() {
+        this.fetchTahun();
+        this.fetchPabrik();
+        this.fetchSumberEmisi();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -392,6 +232,33 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchPabrik() {
+            axios.get(`/api/valuelist/getpabrikdata`)
+                .then(response => {
+                    this.pabrik_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchSumberEmisi() {
+            axios.get(`/api/valuelist/getsumberemisidata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

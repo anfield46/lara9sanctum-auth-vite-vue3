@@ -106,141 +106,9 @@
                     </el-row>
 
                     <el-row :gutter="20">
-                        <el-col :span="7">
+                        <el-col :span="10">
                             <Field name="energy_consumption_liter" type="number" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Energy Consumption Liter" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="10">
-                            <Field name="conversion_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Conversion Factor(TJ/Liter)" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="7">
-                            <Field name="energy_consumption_tj" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Energy Consumption TJ" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="co2_emission_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emission Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="co2_emission" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emission" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="ch4_emission_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CH4 Emission Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="ch4_emission" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CH4 Emission" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="n2o_emission_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="N2O Emission Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="n2o_co2_emission" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="N2O CO2 Emission" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="gg_co2eq" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Gg CO2eq" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="ton_co2eq" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Ton CO2eq" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -299,28 +167,7 @@ export default {
             penerbangan: {
                 file: ''
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
         }
     },
     setup() {
@@ -331,22 +178,13 @@ export default {
             jam_terbang: yup.number().required().label('Jam Terbang'),
             konsumsi_bahan_bakar: yup.number().required().label('Konsumsi Bahan Bakar'),
             energy_consumption_liter: yup.number().required().label('Energy Consumption Liter'),
-            conversion_factor: yup.number().required().label('Conversion Factor(TJ/Liter)'),
-            energy_consumption_tj: yup.number().required().label('Energy Consumption TJ'),
-            co2_emission_factor: yup.number().required().label('CO2 Emission Factor'),
-            co2_emission: yup.number().required().label('CO2 Emission'),
-            ch4_emission_factor: yup.number().required().label('CH4 Emission Factor'),
-            ch4_emission: yup.number().required().label('CH4 Emission'),
-            n2o_emission_factor: yup.number().required().label('N2O Emission Factor'),
-            n2o_co2_emission: yup.number().required().label('N2O CO2 Emission'),
-            gg_co2eq: yup.number().required().label('Gg CO2eq'),
-            ton_co2eq: yup.number().required().label('Ton CO2eq'),
             });
         return {
             schema,
         };
     },
     created() {
+        this.fetchTahun();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -398,6 +236,15 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

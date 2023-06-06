@@ -52,7 +52,7 @@
                     </el-row>
 
                     <el-row :gutter="20">
-                        <el-col :span="7">
+                        <el-col :span="10">
                             <Field name="energy_consumption_liter" type="number" v-model="daratsolar.energy_consumption_liter" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Consumption Liter" required>
                                 <el-input
@@ -65,20 +65,8 @@
                             </Field>
                         </el-col>
                         <el-col :span="10">
-                            <Field name="conversion_factor" type="number" v-model="daratsolar.conversion_factor" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Conversion Factor(TJ/Liter)" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="7">
-                            <Field name="energy_consumption_tj" type="number" v-model="daratsolar.energy_consumption_tj" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Consumption TJ" required>
+                            <Field name="biodiesel" type="number" v-model="daratsolar.biodiesel" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Biodiesel(%)" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -90,7 +78,7 @@
                         </el-col>
                     </el-row>
 
-                    <el-row :gutter="20">
+                    <!-- <el-row :gutter="20">
                         <el-col :span="12">
                             <Field name="co2_emission_factor" type="number" v-model="daratsolar.co2_emission_factor" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="CO2 Emission Factor" required>
@@ -184,7 +172,7 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
+                    </el-row> -->
                 
             </div>
             <!--end::Scroll-->
@@ -236,53 +224,34 @@ export default {
                 id: "",
                 tahun: "",
                 energy_consumption_liter: "",
-                conversion_factor: "",
-                energy_consumption_tj: "",
-                co2_emission_factor: "",
-                co2_emission: "",
-                ch4_emission_factor: "",
-                ch4_emission: "",
-                n2o_emission_factor: "",
-                n2o_co2_emission: "",
-                ton_co2eq: "",
+                biodiesel: "",
+                // conversion_factor: "",
+                // energy_consumption_tj: "",
+                // co2_emission_factor: "",
+                // co2_emission: "",
+                // ch4_emission_factor: "",
+                // ch4_emission: "",
+                // n2o_emission_factor: "",
+                // n2o_co2_emission: "",
+                // ton_co2eq: "",
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
         }
     },
     setup() {
         const schema = yup.object({
             tahun: yup.string().required().label('Tahun'),
             energy_consumption_liter: yup.number().required().label('Energy Consumption Liter'),
-            conversion_factor: yup.number().required().label('Conversion Factor(TJ/Liter)'),
-            energy_consumption_tj: yup.number().required().label('Energy Consumption TJ'),
-            co2_emission_factor: yup.number().required().label('CO2 Emission Factor'),
-            co2_emission: yup.number().required().label('CO2 Emission'),
-            ch4_emission_factor: yup.number().required().label('CH4 Emission Factor'),
-            ch4_emission: yup.number().required().label('CH4 Emission'),
-            n2o_emission_factor: yup.number().required().label('N2O Emission Factor'),
-            n2o_co2_emission: yup.number().required().label('N2O CO2 Emission'),
-            ton_co2eq: yup.number().required().label('Ton CO2eq'),
+            biodiesel: yup.number().required().label('Biodiesel(%)'),
+            // conversion_factor: yup.number().required().label('Conversion Factor(TJ/Liter)'),
+            // energy_consumption_tj: yup.number().required().label('Energy Consumption TJ'),
+            // co2_emission_factor: yup.number().required().label('CO2 Emission Factor'),
+            // co2_emission: yup.number().required().label('CO2 Emission'),
+            // ch4_emission_factor: yup.number().required().label('CH4 Emission Factor'),
+            // ch4_emission: yup.number().required().label('CH4 Emission'),
+            // n2o_emission_factor: yup.number().required().label('N2O Emission Factor'),
+            // n2o_co2_emission: yup.number().required().label('N2O CO2 Emission'),
+            // ton_co2eq: yup.number().required().label('Ton CO2eq'),
             });
         return {
             schema,
@@ -293,22 +262,24 @@ export default {
             handler(val, old) {
                 this.daratsolar.id = val.id;
                 this.daratsolar.tahun = val.tahun;
-                this.daratsolar.pabrik = val.pabrik;
-                this.daratsolar.sumber_emisi = val.sumber_emisi;
+                // this.daratsolar.pabrik = val.pabrik;
+                // this.daratsolar.sumber_emisi = val.sumber_emisi;
                 this.daratsolar.energy_consumption_liter = val.energy_consumption_liter;
-                this.daratsolar.conversion_factor = val.conversion_factor;
-                this.daratsolar.energy_consumption_tj = val.energy_consumption_tj;
-                this.daratsolar.co2_emission_factor = val.CO2_emission_factor;
-                this.daratsolar.co2_emission = val.CO2_emission;
-                this.daratsolar.ch4_emission_factor = val.CH4_emission_factor;
-                this.daratsolar.ch4_emission = val.CH4_emission;
-                this.daratsolar.n2o_emission_factor = val.N2O_emission_factor;
-                this.daratsolar.n2o_co2_emission = val.N2O_CO2_emission;
-                this.daratsolar.ton_co2eq = val.ton_CO2eq;
+                this.daratsolar.biodiesel = val.biodiesel;
+                // this.daratsolar.conversion_factor = val.conversion_factor;
+                // this.daratsolar.energy_consumption_tj = val.energy_consumption_tj;
+                // this.daratsolar.co2_emission_factor = val.CO2_emission_factor;
+                // this.daratsolar.co2_emission = val.CO2_emission;
+                // this.daratsolar.ch4_emission_factor = val.CH4_emission_factor;
+                // this.daratsolar.ch4_emission = val.CH4_emission;
+                // this.daratsolar.n2o_emission_factor = val.N2O_emission_factor;
+                // this.daratsolar.n2o_co2_emission = val.N2O_CO2_emission;
+                // this.daratsolar.ton_co2eq = val.ton_CO2eq;
             },
         },
     },
     created() {
+        this.fetchTahun();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -360,6 +331,15 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

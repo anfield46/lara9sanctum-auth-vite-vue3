@@ -1,6 +1,9 @@
 {
-    "/js/app.js": "/js/app.js?id=d84e600845f9c1569ab025712b58cae7",
+    "/js/app.js": "/js/app.js?id=d1d1e83913a2650681c6f236ec6d79b6",
+    "/js/pdfmake.js": "/js/pdfmake.js?id=f458268f3e5083364e2a476bb17424a2",
+    "/js/canvg.js": "/js/canvg.js?id=1a973c601e71622f2c62b1048ea7c0f7",
+    "/js/xlsx.js": "/js/xlsx.js?id=ca7b1ecb5818d28cbb2df4b3d363b468",
     "/css/app.css": "/css/app.css?id=68b329da9893e34099c7d8ad5cb9c940",
-    "/css/template.css": "/css/template.css?id=390e5fe067cba8a007b39a2c0fc4c09b",
+    "/css/template.css": "/css/template.css?id=710ebd70636fb81b71255a4953f27e62",
     "/js/template.js": "/js/template.js?id=e71f47e6e0c8b27d289127bc585c6513"
 }

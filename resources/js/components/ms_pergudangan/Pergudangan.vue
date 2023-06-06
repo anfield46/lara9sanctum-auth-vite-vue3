@@ -103,6 +103,10 @@
           data-type="string"
           />
           <DxColumn
+          data-field="energy_consumption"
+          data-type="string"
+          />
+          <DxColumn
           data-field="CO2_emission_factor"
           data-type="string"
           />

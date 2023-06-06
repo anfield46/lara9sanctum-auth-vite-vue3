@@ -33,6 +33,8 @@
               class="scroll-y me-n7 pe-7"
               id="kt_edit_modal_coal_scroll"
             >
+
+                    <input :value="text" style="border:white;"/>
                 
                     <el-row :gutter="20">
                         <el-col :span="12">
@@ -49,40 +51,60 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="8">
-                            <Field name="pabrik" v-model="coal.pabrik" v-slot="{ value, field, errorMessage }">
+                        <el-col :span="12">
+                            <Field name="id_pabrik" type="select" v-model="coal.id_pabrik" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Pabrik" required>
-                                <el-input
-                                placeholder="Nama Pabrik"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in pabrik_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
+                    </el-row>
 
-                        <el-col :span="8">
-                            <Field name="sumber_emisi" v-model="coal.sumber_emisi" v-slot="{ value, field, errorMessage }">
+                    <el-row :gutter="20">
+                        <el-col :span="12">
+                            <Field name="id_sumber_emisi" type="select" v-model="coal.id_sumber_emisi" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Nama Sumber Emisi" required>
-                                <el-input
-                                placeholder="Sumber Emisi"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in sumberemisi_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
 
-                        <el-col :span="8">
-                            <Field name="tipe_batubara" v-model="coal.tipe_batubara" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Tipe Batubara" required>
+                        <el-col :span="12">
+                            <Field name="id_tipe_batubara" type="select" v-model="coal.id_tipe_batubara" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Tipe Barubara" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in tipebatubara_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :gutter="20">
+                        <el-col :span="12">
+                            <Field name="consumption_mmbtu" type="number" v-model="coal.consumption_mmbtu" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Consumption MMBTU" required>
                                 <el-input
-                                placeholder="Tipe Batubara"
+                                placeholder="0"
                                 v-bind="field"
                                 :validate-event="false"
                                 :model-value="value"
@@ -92,7 +114,7 @@
                         </el-col>
                     </el-row>
 
-                    <el-row :gutter="20">
+                    <!-- <el-row :gutter="20">
                         <el-col :span="7">
                             <Field name="consumption_mmbtu" type="number" v-model="coal.consumption_mmbtu" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Consumption MMBTU" required>
@@ -225,7 +247,7 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
+                    </el-row> -->
                 
             </div>
             <!--end::Scroll-->
@@ -276,42 +298,27 @@ export default {
             coal: {
                 id: "",
                 tahun: "",
-                pabrik: "tes",
-                sumber_emisi: "",
-                tipe_batubara: "",
-                consumption_mmbtu: "",
-                consumption_tj: "",
-                conversion_on_factor: "",
-                co2_emissions_factor: "",
-                co2_emissions: "",
-                ch4_emissions_factor: "",
-                ch4_emissions: "",
-                n2o_emissions_factor: "",
-                n2o_emissions: "",
-                co2eq: "",
+                id_pabrik: 0,
+                id_sumber_emisi: 0,
+                id_tipe_batubara: 0,
+                consumption_mmbtu: 0,
+                // pabrik: "tes",
+                // sumber_emisi: "",
+                // tipe_batubara: "",
+                // consumption_mmbtu: "",
+                // consumption_tj: "",
+                // conversion_on_factor: "",
+                // co2_emissions_factor: "",
+                // co2_emissions: "",
+                // ch4_emissions_factor: "",
+                // ch4_emissions: "",
+                // n2o_emissions_factor: "",
+                // n2o_emissions: "",
+                // co2eq: "",
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
+            pabrik_options: [],
+            sumberemisi_options: [],
         }
     },
     setup() {
@@ -321,15 +328,15 @@ export default {
             sumber_emisi: yup.string().required().label('Nama Sumber Emisi'),
             tipe_batubara: yup.string().required().label('Tipe Batubara'),
             consumption_mmbtu: yup.number().required().label('Consumption MMBTU'),
-            conversion_factor: yup.number().required().label('Conversion on Factor(TJ/MMBTU)'),
-            consumption_tj: yup.number().required().label('Consumption TJ'),
-            co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
-            co2_emissions: yup.number().required().label('CO2 Emissions'),
-            ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
-            ch4_emissions: yup.number().required().label('CH4 Emissions'),
-            n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
-            n2o_emissions: yup.number().required().label('N2O Emissions'),
-            co2eq: yup.number().required().label('CO2eq'),
+            // conversion_factor: yup.number().required().label('Conversion on Factor(TJ/MMBTU)'),
+            // consumption_tj: yup.number().required().label('Consumption TJ'),
+            // co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
+            // co2_emissions: yup.number().required().label('CO2 Emissions'),
+            // ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
+            // ch4_emissions: yup.number().required().label('CH4 Emissions'),
+            // n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
+            // n2o_emissions: yup.number().required().label('N2O Emissions'),
+            // co2eq: yup.number().required().label('CO2eq'),
             });
         return {
             schema,
@@ -340,23 +347,27 @@ export default {
             handler(val, old) {
                 this.coal.id = val.id;
                 this.coal.tahun = val.tahun;
-                this.coal.pabrik = val.pabrik;
-                this.coal.sumber_emisi = val.sumber_emisi;
-                this.coal.tipe_batubara = val.tipe_batubara;
+                this.coal.id_pabrik = val.id_pabrik;
+                this.coal.id_sumber_emisi = val.id_sumber_emisi;
+                this.coal.id_tipe_batubara = val.id_tipe_batubara;
                 this.coal.consumption_mmbtu = val.consumption_mmbtu;
-                this.coal.consumption_tj = val.consumption_tj;
-                this.coal.conversion_on_factor = val.conversion_factor;
-                this.coal.co2_emissions_factor = val.CO2_emissions_factor;
-                this.coal.co2_emissions = val.CO2_emissions;
-                this.coal.ch4_emissions_factor = val.CH4_emissions_factor;
-                this.coal.ch4_emissions = val.CH4_emissions;
-                this.coal.n2o_emissions_factor = val.N2O_emissions_factor;
-                this.coal.n2o_emissions = val.N2O_emissions;
-                this.coal.co2eq = val.CO2eq;
+                // this.coal.consumption_tj = val.consumption_tj;
+                // this.coal.conversion_on_factor = val.conversion_factor;
+                // this.coal.co2_emissions_factor = val.CO2_emissions_factor;
+                // this.coal.co2_emissions = val.CO2_emissions;
+                // this.coal.ch4_emissions_factor = val.CH4_emissions_factor;
+                // this.coal.ch4_emissions = val.CH4_emissions;
+                // this.coal.n2o_emissions_factor = val.N2O_emissions_factor;
+                // this.coal.n2o_emissions = val.N2O_emissions;
+                // this.coal.co2eq = val.CO2eq;
             },
         },
     },
     created() {
+        this.fetchTahun();
+        this.fetchPabrik();
+        this.fetchSumberEmisi();
+        this.fetchTipeBatubara();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -408,6 +419,42 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchPabrik() {
+            axios.get(`/api/valuelist/getpabrikdata`)
+                .then(response => {
+                    this.pabrik_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchSumberEmisi() {
+            axios.get(`/api/valuelist/getsumberemisidata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchTipeBatubara() {
+            axios.get(`/api/valuelist/gettipebatubaradata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

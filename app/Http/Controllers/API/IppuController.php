@@ -16,7 +16,7 @@ class IppuController extends Controller
     /////////////////////////// master data
     public function loadippu(Request $request, Core $devextreme) //dx grid
     {
-        $ippu = DB::table('ms_ippu as a')
+        $ippu = DB::table('vw_ippu as a')
             ->select('a.*');
         $data = $devextreme->data($ippu, $request, 'id');
         $datax1 = array();
@@ -24,16 +24,17 @@ class IppuController extends Controller
             $datax1[] = array(
                 'id' => Core::encodex($d->id),
                 'tahun' => $d->tahun,
-                'sumber_emisi' => $d->sumber_emisi,
+                'id_pabrik' => $d->id_pabrik,
+                'pabrik' => $d->pabrik,
                 'amount_of_ammonia_produced' => $d->amount_of_ammonia_produced,
-                'fuel_requirement_for_ammonia_production' => $d->fuel_requirement_for_ammonia_production,
+                'fuel_requirement_for_ammonia_production' => $d->fuel_requirement,
                 'carbon_content_of_fuel' => $d->carbon_content_of_fuel,
                 'carbon_oxidation_factor_of_fuel' => $d->carbon_oxidation_factor_of_fuel,
-                'CO2_generated' => $d->CO2_generated,
+                'CO2_generated' => $d->co2_generated,
                 'amount_of_urea_produced' => $d->amount_of_urea_produced,
-                'CO2_recovered_for_urea_production' => $d->CO2_recovered_for_urea_production,
-                'CO2_recovered_for_urea' => $d->CO2_recovered_for_urea,
-                'CO2_emissions' => $d->CO2_emissions
+                'CO2_recovered_for_urea_production' => $d->co2_recovered_for_urea_production,
+                'CO2_recovered_for_urea' => $d->co2_recovered_for_urea,
+                'CO2_emissions' => $d->co2_emissions
             );
         }
         return response()->json(
@@ -55,23 +56,21 @@ class IppuController extends Controller
     // add ippu
     public function add(Request $request)
     {
-        $existing = Ippu::where('tahun', $request->tahun)->where('sumber_emisi', $request->sumber_emisi)->first();
+        $existing = Ippu::where('tahun', $request->tahun)->where('id_pabrik', $request->sumber_emisi)->first();
         if ($existing) {
             return response()->json(array('messageinput'   => '0', 'message' => 'Data Gagal ditambahkan, master data sudah tersedia!'));
         }
 
         $ippu = new Ippu([
             'tahun' => $request->tahun,
-            'sumber_emisi' => $request->sumber_emisi,
+            'id_pabrik' => $request->pabrik,
             'amount_of_ammonia_produced' => $request->amount_of_ammonia_produced,
-            'fuel_requirement_for_ammonia_production' => $request->fuel_requirement_for_ammonia_production,
+            'gas_fuel_needs' => $request->gas_fuel_needs,
+            'gas_process_needs' => $request->gas_process_needs,
             'carbon_content_of_fuel' => $request->carbon_content_of_fuel,
             'carbon_oxidation_factor_of_fuel' => $request->carbon_oxidation_factor_of_fuel,
-            'CO2_generated' => $request->CO2_generated,
             'amount_of_urea_produced' => $request->amount_of_urea_produced,
-            'CO2_recovered_for_urea_production' => $request->CO2_recovered_for_urea_production,
             'CO2_recovered_for_urea' => $request->CO2_recovered_for_urea,
-            'CO2_emissions' => $request->CO2_emissions,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ]);

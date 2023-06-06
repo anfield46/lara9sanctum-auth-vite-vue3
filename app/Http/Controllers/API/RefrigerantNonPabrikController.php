@@ -16,7 +16,7 @@ class RefrigerantNonPabrikController extends Controller
     /////////////////////////// master data
     public function loadrefrigerantnonpabrik(Request $request, Core $devextreme) //dx grid
     {
-        $refrigerantnonpabrik = DB::table('ms_refrigerant_non_pabrik as a')
+        $refrigerantnonpabrik = DB::table('vw_refrigerant_non_pabrik as a')
             ->select('a.*');
         $data = $devextreme->data($refrigerantnonpabrik, $request, 'id');
         $datax1 = array();
@@ -24,16 +24,15 @@ class RefrigerantNonPabrikController extends Controller
             $datax1[] = array(
                 'id' => Core::encodex($d->id),
                 'tahun' => $d->tahun,
+                'id_sumber_emisi' => $d->id_sumber_emisi,
                 'sumber_emisi' => $d->sumber_emisi,
                 'activity' => $d->activity,
                 'fuel_type' => $d->fuel_type,
                 'unit' => $d->unit,
-                'amount_botol' => $d->amount_botol,
-                'amount_kg_botol' => $d->amount_kg_botol,
-                'amount_kg' => $d->amount_kg,
-                'operating_emission' => $d->operating_emission,
+                'amount' => $d->amount,
+                'operating_emission' => $d->operating_emission_factor,
                 'GWP' => $d->GWP,
-                'CO2eq' => $d->CO2eq
+                'CO2eq' => $d->co2eq
             );
         }
         return response()->json(
@@ -55,23 +54,30 @@ class RefrigerantNonPabrikController extends Controller
     // add refrigerantnonpabrik
     public function add(Request $request)
     {
-        $existing = RefrigerantNonPabrik::where('tahun', $request->tahun)->where('sumber_emisi', $request->sumber_emisi)->where('fuel_type', $request->fuel_type)->first();
+        $existing = RefrigerantNonPabrik::where('tahun', $request->tahun)->where('id_sumber_emisi', $request->id_sumber_emisi)->where('fuel_type', $request->fuel_type)->first();
         if ($existing) {
             return response()->json(array('messageinput'   => '0', 'message' => 'Data Gagal ditambahkan, master data sudah tersedia!'));
         }
 
+        $getvalue = DB::table('vl_air_cooling_system as a')
+        ->where('activity', $request->activity)
+            ->where('fuel_type', $request->fuel_type)
+            ->first();
+
+
+        if (is_null($getvalue)) {
+            return response()->json(array('messageinput'   => '0', 'message' => 'Data Gagal ditambahkan, data value belum tersedia'));
+        }
+
         $refrigerantnonpabrik = new RefrigerantNonPabrik([
             'tahun' => $request->tahun,
-            'sumber_emisi' => $request->sumber_emisi,
+            'id_sumber_emisi' => $request->sumber_emisi,
             'activity' => $request->activity,
             'fuel_type' => $request->fuel_type,
-            'unit' => $request->unit,
-            'amount_botol' => $request->amount_botol,
-            'amount_kg_botol' => $request->amount_kg_botol,
-            'amount_kg' => $request->amount_kg,
-            'operating_emission' => $request->operating_emission,
-            'GWP' => $request->GWP,
-            'CO2eq' => $request->CO2eq,
+            'unit' => $getvalue->unit,
+            'amount' => $request->amount,
+            'operating_emission_factor' => $getvalue->operating_emission,
+            'GWP' => $getvalue->gwp,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ]);
@@ -90,6 +96,16 @@ class RefrigerantNonPabrikController extends Controller
     public function update($id, Request $request)
     {
         $refrigerantnonpabrik = RefrigerantNonPabrik::find($id);
+
+        $getvalue = DB::table('vl_air_cooling_system as a')
+            ->where('activity', $request->activity)
+            ->where('fuel_type', $request->fuel_type)
+            ->first();
+
+        $request['unit'] = $getvalue->unit;
+        $request['operating_emission_factor'] = $getvalue->operating_emission;
+        $request['GWP'] = $getvalue->gwp;
+
         $refrigerantnonpabrik->update($request->all());
         return response()->json(array('messageinput'   => '1', 'message' => 'Data Berhasil disimpan.'));
     }

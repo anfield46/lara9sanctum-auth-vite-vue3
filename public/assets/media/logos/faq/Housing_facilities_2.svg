@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56 56">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #54ace2;
+      }
+
+      .cls-3, .cls-4, .cls-5, .cls-2, .cls-6 {
+        isolation: isolate;
+      }
+
+      .cls-4 {
+        fill: #7cc3f7;
+      }
+
+      .cls-5 {
+        fill: #1268b3;
+      }
+
+      .cls-6 {
+        fill: #f29a68;
+      }
+
+      .cls-7 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-8 {
+        fill: none;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-8" x="4" y="26" width="15.34" height="26.07"/>
+    </clipPath>
+  </defs>
+  <rect class="cls-8" x="0" y="0" width="56" height="56" rx=".3" ry=".3"/>
+  <rect class="cls-6" x="4" y="29.09" width="48" height="22.98"/>
+  <g>
+    <rect class="cls-4" x="32.55" y="8.07" width="14.02" height="21.03"/>
+    <rect class="cls-4" x="31.85" y="5.12" width="15.42" height="2.8"/>
+    <rect class="cls-4" x="33.11" y="4" width="12.89" height="1.12"/>
+    <rect class="cls-3" x="32.55" y="7.92" width="14.02" height="1.12"/>
+    <g>
+      <rect class="cls-2" x="33.95" y="10.56" width="4.91" height="3.5" rx=".2" ry=".2"/>
+      <rect class="cls-2" x="40.26" y="10.56" width="4.91" height="3.5" rx=".2" ry=".2"/>
+      <rect class="cls-2" x="33.95" y="15.47" width="4.91" height="3.5" rx=".2" ry=".2"/>
+      <rect class="cls-2" x="40.26" y="15.47" width="4.91" height="3.5" rx=".2" ry=".2"/>
+      <rect class="cls-2" x="33.95" y="20.38" width="4.91" height="3.5" rx=".2" ry=".2"/>
+      <rect class="cls-2" x="40.26" y="20.38" width="4.91" height="3.5" rx=".2" ry=".2"/>
+    </g>
+  </g>
+  <g class="cls-7">
+    <g>
+      <polygon class="cls-4" points="2.22 27.85 -10.84 37.19 -10.89 37.19 -10.89 52.15 15.28 52.15 15.28 37.19 2.22 27.85"/>
+      <polygon class="cls-3" points="-10.84 37.56 -10.89 37.56 -10.89 39.53 2.15 29.6 15.28 39.61 15.28 37.56 2.22 28.22 -10.84 37.56"/>
+      <polygon class="cls-5" points="2.2 26 -13.22 37.43 -12.16 39.08 2.2 28.14 16.56 39.08 17.62 37.43 2.2 26"/>
+      <path class="cls-1" d="m6.79,39.53c-1.81,0-3.27,1.46-3.27,3.27v9.35h6.54v-9.35c0-1.81-1.46-3.27-3.27-3.27Z"/>
+      <circle class="cls-5" cx="8.66" cy="46.3" r=".47"/>
+    </g>
+  </g>
+  <g>
+    <polygon class="cls-4" points="18.61 13.27 10.1 19.36 10.07 19.36 10.07 29.09 27.11 29.09 27.11 19.36 18.61 13.27"/>
+    <polygon class="cls-3" points="10.1 19.6 10.07 19.6 10.07 20.88 18.56 14.41 27.11 20.93 27.11 19.6 18.61 13.51 10.1 19.6"/>
+    <polygon class="cls-5" points="18.59 12.07 8.55 19.51 9.24 20.59 18.59 13.46 27.94 20.59 28.63 19.51 18.59 12.07"/>
+    <path class="cls-1" d="m22.12,20.88c-1.18,0-2.13.95-2.13,2.13v6.08h4.26v-6.08c0-1.18-.95-2.13-2.13-2.13Z"/>
+    <circle class="cls-5" cx="23.34" cy="25.29" r=".3"/>
+    <rect class="cls-2" x="12.79" y="21.41" width="3.97" height="4.72" rx=".21" ry=".21"/>
+  </g>
+  <g>
+    <polygon class="cls-4" points="37.57 27.77 24.51 37.12 24.46 37.12 24.46 52.07 50.63 52.07 50.63 37.12 37.57 27.77"/>
+    <polygon class="cls-3" points="24.51 37.49 24.46 37.49 24.46 39.46 37.49 29.53 50.63 39.54 50.63 37.49 37.57 28.15 24.51 37.49"/>
+    <polygon class="cls-5" points="37.54 25.93 22.12 37.36 23.18 39.01 37.54 28.07 51.9 39.01 52.96 37.36 37.54 25.93"/>
+    <path class="cls-1" d="m42.96,39.46c-1.81,0-3.27,1.46-3.27,3.27v9.35h6.54v-9.35c0-1.81-1.46-3.27-3.27-3.27Z"/>
+    <circle class="cls-5" cx="44.83" cy="46.23" r=".47"/>
+    <rect class="cls-2" x="32.6" y="39.46" width="3.11" height="10.26" rx=".27" ry=".27"/>
+    <rect class="cls-2" x="28.15" y="39.46" width="3.11" height="10.26" rx=".27" ry=".27"/>
+  </g>
+</svg>

@@ -52,37 +52,9 @@
                     </el-row>
 
                     <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="type_of_treatment_or_discharge_pathway" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Type of treatment or discharge pathway" required>
-                                <el-input
-                                placeholder="Type of treatment or discharge pathway"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-
-                        <el-col :span="12">
-                            <Field name="TOWi" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Total organic degradable material in wastewater for each industry sector" required>
-                                <el-input
-                                placeholder="Sumber Emisi"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="7">
-                            <Field name="Si" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Sludge removed in each industry sector" required>
+                        <el-col :span="10">
+                            <Field name="EP_A" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Wastewater generated EP-A" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -93,20 +65,8 @@
                             </Field>
                         </el-col>
                         <el-col :span="10">
-                            <Field name="EFi" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Emission factor for each treatment system" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="7">
-                            <Field name="Ri" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Recovered CH4 in each industry sector" required>
+                            <Field name="EP_B" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Wastewater generated EP-B" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -119,9 +79,9 @@
                     </el-row>
 
                     <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="CH4" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Net methane emissions" required>
+                        <el-col :span="10">
+                            <Field name="Pi" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Total industry product" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -131,9 +91,9 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                        <el-col :span="12">
-                            <Field name="CO2eq" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 equivalent" required>
+                        <el-col :span="10">
+                            <Field name="CODi" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Chemical Oxygen Demand" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -143,7 +103,8 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>                
+                    </el-row>
+
             </div>
             <!--end::Scroll-->
           </div>
@@ -191,46 +152,23 @@ export default {
             limbahcair: {
                 file: ''
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
         }
     },
     setup() {
         const schema = yup.object({
             industrial_sector: yup.string().required().label('Industrial sector'),
-            type_of_treatment_or_discharge_pathway: yup.string().required().label('Type of treatment or discharge pathway'),
-            TOWi: yup.number().required().label('Total organic degradable material in wastewater for each industry sector'),
-            Si: yup.number().required().label('Sludge removed in each industry sector'),
-            EFi: yup.number().required().label('Emission factor for each treatment system'),
-            Ri: yup.number().required().label('Recovered CH4 in each industry sector'),
-            CH4: yup.number().required().label('Net methane emissions'),
-            CO2eq: yup.number().required().label('CO2 equivalent')
+            EP_A: yup.number().required().label('Wastewater generated EP-A'),
+            EP_B: yup.number().required().label('Wastewater generated EP-B'),
+            Pi: yup.number().required().label('Total industry product'),
+            CODi: yup.number().required().label('Chemical Oxygen Demand'),
             });
         return {
             schema,
         };
     },
     created() {
+        this.fetchTahun();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -282,6 +220,15 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

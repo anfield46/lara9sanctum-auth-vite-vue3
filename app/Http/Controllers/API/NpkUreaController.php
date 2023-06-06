@@ -16,7 +16,7 @@ class NpkUreaController extends Controller
     /////////////////////////// master data
     public function loadnpkurea(Request $request, Core $devextreme) //dx grid
     {
-        $npkurea = DB::table('ms_npk_urea as a')
+        $npkurea = DB::table('vw_npk_urea as a')
             ->select('a.*');
         $data = $devextreme->data($npkurea, $request, 'id');
         $datax1 = array();
@@ -26,8 +26,8 @@ class NpkUreaController extends Controller
                 'tahun' => $d->tahun,
                 'jenis' => $d->jenis,
                 'annual_amount' => $d->annual_amount,
-                'emission_factor' => $d->emission_factor,
-                'annual_CO2eq' => $d->annual_CO2eq
+                'emission_factor' => $d->co2_emission_factor,
+                'annual_CO2eq' => $d->annual_co2eq
             );
         }
         return response()->json(

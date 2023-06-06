@@ -52,6 +52,33 @@
                     </el-row>
 
                     <el-row :gutter="20">
+                        <el-col :span="10">
+                            <Field name="energy_consumption_liter" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Energy Consumption Liter" required>
+                                <el-input
+                                placeholder="0"
+                                v-bind="field"
+                                :validate-event="false"
+                                :model-value="value"
+                                />
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                        <el-col :span="10">
+                            <Field name="biodiesel" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Biodiesel(%)" required>
+                                <el-input
+                                placeholder="0"
+                                v-bind="field"
+                                :validate-event="false"
+                                :model-value="value"
+                                />
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                    </el-row>
+
+                    <!-- <el-row :gutter="20">
                         <el-col :span="7">
                             <Field name="energy_consumption_liter" type="number" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Energy Consumption Liter" required>
@@ -184,7 +211,7 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                    </el-row>
+                    </el-row> -->
                 
             </div>
             <!--end::Scroll-->
@@ -233,49 +260,30 @@ export default {
             darat_solar: {
                 file: ''
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
         }
     },
     setup() {
         const schema = yup.object({
             tahun: yup.string().required().label('Tahun'),
             energy_consumption_liter: yup.number().required().label('Energy Consumption Liter'),
-            conversion_factor: yup.number().required().label('Conversion Factor(TJ/Liter)'),
-            energy_consumption_tj: yup.number().required().label('Energy Consumption TJ'),
-            co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
-            co2_emissions: yup.number().required().label('CO2 Emissions'),
-            ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
-            ch4_emissions: yup.number().required().label('CH4 Emissions'),
-            n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
-            n2o_emissions: yup.number().required().label('N2O Emissions'),
-            ton_co2eq: yup.number().required().label('ton_CO2eq'),
+            biodiesel: yup.number().required().label('Biodiesel(%)'),
+            // conversion_factor: yup.number().required().label('Conversion Factor(TJ/Liter)'),
+            // energy_consumption_tj: yup.number().required().label('Energy Consumption TJ'),
+            // co2_emissions_factor: yup.number().required().label('CO2 Emissions Factor'),
+            // co2_emissions: yup.number().required().label('CO2 Emissions'),
+            // ch4_emissions_factor: yup.number().required().label('CH4 Emissions Factor'),
+            // ch4_emissions: yup.number().required().label('CH4 Emissions'),
+            // n2o_emissions_factor: yup.number().required().label('N2O Emissions Factor'),
+            // n2o_emissions: yup.number().required().label('N2O Emissions'),
+            // ton_co2eq: yup.number().required().label('ton_CO2eq'),
             });
         return {
             schema,
         };
     },
     created() {
+        this.fetchTahun();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -327,6 +335,15 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

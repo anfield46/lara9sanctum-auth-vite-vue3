@@ -33,10 +33,10 @@
               class="scroll-y me-n7 pe-7"
               id="kt_edit_modal_ippu_scroll"
             >
-                
+
                     <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="tahun" v-model="ippu.tahun" type="select" v-slot="{ value, field, errorMessage }">
+                            <Field name="tahun" type="select" v-model="ippu.tahun" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Tahun" required>
                                 <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
                                 <el-option
@@ -49,12 +49,40 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-
                         <el-col :span="12">
-                            <Field name="sumber_emisi" v-model="ippu.sumber_emisi" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Sumber Emisi" required>
+                            <Field name="id_pabrik" type="select" v-model="ippu.id_pabrik" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Pabrik" required>
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in pabrik_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                                </el-select>
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                    </el-row>
+
+                    <el-row :gutter="20">
+                        <el-col :span="12">
+                            <Field name="gas_fuel_needs" v-model="ippu.gas_fuel_needs" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Kebutuhan Gas Fuel" required>
                                 <el-input
-                                placeholder="Sumber Emisi"
+                                placeholder="0"
+                                v-bind="field"
+                                :validate-event="false"
+                                :model-value="value"
+                                />
+                            </el-form-item>
+                            </Field>
+                        </el-col>
+                        <el-col :span="12">
+                            <Field name="gas_process_needs" v-model="ippu.gas_process_needs" type="number" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Kebutuhan Gas Proses" required>
+                                <el-input
+                                placeholder="0"
                                 v-bind="field"
                                 :validate-event="false"
                                 :model-value="value"
@@ -68,18 +96,6 @@
                         <el-col :span="12">
                             <Field name="amount_of_ammonia_produced" v-model="ippu.amount_of_ammonia_produced" type="number" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Amount of Ammonia Produced" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="fuel_requirement_for_ammonia_production" v-model="ippu.fuel_requirement_for_ammonia_production" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Fuel Requirement for Ammonia Production" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -120,35 +136,8 @@
 
                     <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="CO2_generated" v-model="ippu.CO2_generated" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Generated" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
                             <Field name="amount_of_urea_produced" v-model="ippu.amount_of_urea_produced" type="number" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Amount of Urea Produced" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="CO2_recovered_for_urea_production" v-model="ippu.CO2_recovered_for_urea_production" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Recovered for Urea Production" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -161,21 +150,6 @@
                         <el-col :span="12">
                             <Field name="CO2_recovered_for_urea" v-model="ippu.CO2_recovered_for_urea" type="number" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="CO2 Recovered for Urea" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="CO2_emissions" v-model="ippu.CO2_emissions" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 Emissions" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -236,55 +210,31 @@ export default {
             ippu: {
                 id: "",
                 tahun : "",
-                sumber_emisi : "",
+                id_pabrik : 0,
+                gas_fuel_needs : "",
+                gas_process_needs : "",
                 amount_of_ammonia_produced : "",
-                fuel_requirement_for_ammonia_production : "",
                 carbon_content_of_fuel : "",
                 carbon_oxidation_factor_of_fuel : "",
-                CO2_generated : "",
                 amount_of_urea_produced : "",
-                CO2_recovered_for_urea_production : "",
-                CO2_recovered_for_urea : "",
-                CO2_emissions : "",
+                CO2_recovered_for_urea : ""
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
+            pabrik_options: [],
         }
     },
     setup() {
         const schema = yup.object({
             tahun: yup.string().required().label('Tahun'),
-            sumber_emisi: yup.string().required().label('Sumber Emisi'),
+            id_pabrik: yup.string().required().label('Pabrik'),
+            gas_fuel_needs: yup.number().required().label('Kebutuhan Gas Fuel'),
+            gas_process_needs: yup.number().required().label('Kebutuhan Gas Proses'),
             amount_of_ammonia_produced: yup.number().required().label('Amount of Ammonia Produced'),
-            fuel_requirement_for_ammonia_production: yup.number().required().label('Fuel Requirement for Ammonia Production'),
             carbon_content_of_fuel: yup.number().required().label('Carbon Content of Fuel'),
             carbon_oxidation_factor_of_fuel: yup.number().required().label('Carbon Oxidation Factor of Fuel'),
-            CO2_generated: yup.number().required().label('CO2 Generated'),
             amount_of_urea_produced: yup.number().required().label('Amount of Urea Produced'),
-            CO2_recovered_for_urea_production: yup.number().required().label('CO2 Recovered for Urea Production'),
             CO2_recovered_for_urea: yup.number().required().label('CO2 Recovered for Urea'),
-            CO2_emissions: yup.number().required().label('CO2 Emissions')
-            });
+        });
         return {
             schema,
         };
@@ -294,20 +244,20 @@ export default {
             handler(val, old) {
                 this.ippu.id = val.id;
                 this.ippu.tahun = val.tahun;
-                this.ippu.sumber_emisi = val.sumber_emisi;
+                this.ippu.id_pabrik = val.id_pabrik;
+                this.ippu.gas_fuel_needs = val.gas_fuel_needs;
+                this.ippu.gas_process_needs = val.gas_process_needs;
                 this.ippu.amount_of_ammonia_produced = val.amount_of_ammonia_produced;
-                this.ippu.fuel_requirement_for_ammonia_production = val.fuel_requirement_for_ammonia_production;
                 this.ippu.carbon_content_of_fuel = val.carbon_content_of_fuel;
                 this.ippu.carbon_oxidation_factor_of_fuel = val.carbon_oxidation_factor_of_fuel;
-                this.ippu.CO2_generated = val.CO2_generated;
                 this.ippu.amount_of_urea_produced = val.amount_of_urea_produced;
-                this.ippu.CO2_recovered_for_urea_production = val.CO2_recovered_for_urea_production;
                 this.ippu.CO2_recovered_for_urea = val.CO2_recovered_for_urea;
-                this.ippu.CO2_emissions = val.CO2_emissions;
             },
         },
     },
     created() {
+        this.fetchTahun();
+        this.fetchPabrik();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -359,6 +309,24 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchPabrik() {
+            axios.get(`/api/valuelist/getpabrikdata`)
+                .then(response => {
+                    this.pabrik_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

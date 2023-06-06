@@ -115,15 +115,7 @@
           data-type="string"
           />
           <DxColumn
-          data-field="amount_botol"
-          data-type="string"
-          />
-          <DxColumn
-          data-field="amount_kg_botol"
-          data-type="string"
-          />
-          <DxColumn
-          data-field="amount_kg"
+          data-field="amount"
           data-type="string"
           />
           <DxColumn

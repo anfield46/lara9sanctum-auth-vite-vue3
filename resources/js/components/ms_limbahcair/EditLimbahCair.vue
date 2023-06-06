@@ -33,10 +33,10 @@
               class="scroll-y me-n7 pe-7"
               id="kt_edit_modal_limbahcair_scroll"
             >
-                
+
                     <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="industrial_sector" v-model="limbahcair.industrial_sector" type="select" v-slot="{ value, field, errorMessage }">
+                            <Field name="industrial_sector" type="select" v-model="limbahcair.industrial_sector" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Industrial sector" required>
                                 <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
                                 <el-option
@@ -52,37 +52,9 @@
                     </el-row>
 
                     <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="type_of_treatment_or_discharge_pathway" v-model="limbahcair.type_of_treatment_or_discharge_pathway" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Type of treatment or discharge pathway" required>
-                                <el-input
-                                placeholder="Type of treatment or discharge pathway"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-
-                        <el-col :span="12">
-                            <Field name="TOWi" v-model="limbahcair.TOWi" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Total organic degradable material in wastewater for each industry sector" required>
-                                <el-input
-                                placeholder="Sumber Emisi"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="7">
-                            <Field name="Si" type="number" v-model="limbahcair.Si" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Sludge removed in each industry sector" required>
+                        <el-col :span="10">
+                            <Field name="EP_A" type="number" v-model="limbahcair.EP_A" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Wastewater generated EP-A" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -93,20 +65,8 @@
                             </Field>
                         </el-col>
                         <el-col :span="10">
-                            <Field name="EFi" type="number" v-model="limbahcair.EFi" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Emission factor for each treatment system" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="7">
-                            <Field name="Ri" type="number" v-model="limbahcair.Ri" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Recovered CH4 in each industry sector" required>
+                            <Field name="EP_B" type="number" v-model="limbahcair.EP_B" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Wastewater generated EP-B" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -119,9 +79,9 @@
                     </el-row>
 
                     <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="CH4" v-model="limbahcair.CH4" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Net methane emissions" required>
+                        <el-col :span="10">
+                            <Field name="Pi" type="number" v-model="limbahcair.Pi" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Total industry product" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -131,9 +91,9 @@
                             </el-form-item>
                             </Field>
                         </el-col>
-                        <el-col :span="12">
-                            <Field name="CO2eq" v-model="limbahcair.CO2eq" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="CO2 equivalent" required>
+                        <el-col :span="10">
+                            <Field name="CODi" type="number" v-model="limbahcair.CODi" v-slot="{ value, field, errorMessage }">
+                            <el-form-item :error="errorMessage" label="Chemical Oxygen Demand" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -194,48 +154,21 @@ export default {
             limbahcair: {
                 id: "",
                 industrial_sector: "",
-                type_of_treatment_or_discharge_pathway: "",
-                TOWi: "",
-                Si: "",
-                EFi: "",
-                Ri: "",
-                CH4: "",
-                CO2eq: ""
+                EP_A: "",
+                EP_B: "",
+                Pi: "",
+                CODi: ""
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
         }
     },
     setup() {
         const schema = yup.object({
             industrial_sector: yup.string().required().label('Industrial sector'),
-            type_of_treatment_or_discharge_pathway: yup.string().required().label('Type of treatment or discharge pathway'),
-            TOWi: yup.number().required().label('Total organic degradable material in wastewater for each industry sector'),
-            Si: yup.number().required().label('Sludge removed in each industry sector'),
-            EFi: yup.number().required().label('Emission factor for each treatment system'),
-            Ri: yup.number().required().label('Recovered CH4 in each industry sector'),
-            CH4: yup.number().required().label('Net methane emissions'),
-            CO2eq: yup.number().required().label('CO2 equivalent')
+            EP_A: yup.number().required().label('Wastewater generated EP-A'),
+            EP_B: yup.number().required().label('Wastewater generated EP-B'),
+            Pi: yup.number().required().label('Total industry product'),
+            CODi: yup.number().required().label('Chemical Oxygen Demand'),
             });
         return {
             schema,
@@ -246,17 +179,15 @@ export default {
             handler(val, old) {
                 this.limbahcair.id = val.id;
                 this.limbahcair.industrial_sector = val.industrial_sector,
-                this.limbahcair.type_of_treatment_or_discharge_pathway = val.type_of_treatment_or_discharge_pathway,
-                this.limbahcair.TOWi = val.TOWi,
-                this.limbahcair.Si = val.Si,
-                this.limbahcair.EFi = val.EFi,
-                this.limbahcair.Ri = val.Ri,
-                this.limbahcair.CH4 = val.CH4,
-                this.limbahcair.CO2eq =val.CO2eq 
+                this.limbahcair.EP_A = val.EP_A,
+                this.limbahcair.EP_B = val.EP_B,
+                this.limbahcair.Pi = val.Pi,
+                this.limbahcair.CODi = val.CODi
             },
         },
     },
     created() {
+        this.fetchTahun();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -308,6 +239,15 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

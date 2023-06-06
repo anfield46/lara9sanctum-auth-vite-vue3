@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7 {
+        isolation: isolate;
+      }
+
+      .cls-2 {
+        fill: #54ace2;
+      }
+
+      .cls-3, .cls-8 {
+        fill: #7cc3f7;
+      }
+
+      .cls-9 {
+        fill: #e6e7e8;
+        fill-rule: evenodd;
+      }
+
+      .cls-4 {
+        fill: #1268b3;
+      }
+
+      .cls-10 {
+        fill: #f47920;
+      }
+
+      .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-6 {
+        fill: #f29a68;
+      }
+
+      .cls-11 {
+        fill: none;
+      }
+
+      .cls-7 {
+        fill: #217dc1;
+      }
+    </style>
+  </defs>
+  <rect class="cls-11" x=".04" y=".05" width="56" height="56" rx=".3" ry=".3"/>
+  <path class="cls-3" d="m26.36,35h-6l.79-14.87c.01-.21.19-.38.4-.38h3.62c.21,0,.39.17.4.38l.8,14.87Z"/>
+  <g class="cls-1">
+    <path class="cls-8" d="m18.36,35h-6l.79-14.87c.01-.21.19-.38.4-.38h3.62c.21,0,.39.17.4.38l.8,14.87Z"/>
+  </g>
+  <rect class="cls-11" y="0" width="56" height="56" rx=".3" ry=".3"/>
+  <path class="cls-3" d="m10.4,35h35.2c.22,0,.4.18.4.4v12.6H10v-12.6c0-.22.18-.4.4-.4Z"/>
+  <path class="cls-4" d="m6.4,50h43.6v2H6v-1.6c0-.22.18-.4.4-.4Z"/>
+  <path class="cls-7" d="m8,48h39.6c.22,0,.4.18.4.4v1.6H8v-2h0Z"/>
+  <rect class="cls-5" x="24" y="38" width="8" height="5" rx=".3" ry=".3"/>
+  <rect class="cls-5" x="35" y="38" width="8" height="5" rx=".3" ry=".3"/>
+  <circle class="cls-6" cx="23.5" cy="14.5" r="2.5"/>
+  <circle class="cls-10" cx="15.25" cy="15.75" r="2.25"/>
+  <circle class="cls-6" cx="16.5" cy="10.5" r="1.5"/>
+  <circle class="cls-10" cx="15" cy="6" r="1"/>
+  <circle class="cls-10" cx="22" cy="9" r="2"/>
+  <circle class="cls-6" cx="24.5" cy="4.5" r="1.5"/>
+  <path class="cls-2" d="m29.4,14h15.2c.22,0,.4.18.4.4v20.6h-16V14.4c0-.22.18-.4.4-.4Z"/>
+  <path class="cls-3" d="m42.5,14h-5l.62-4.65c.03-.2.2-.35.4-.35h2.95c.2,0,.37.15.4.35l.63,4.65Z"/>
+  <polygon class="cls-9" points="40.76 41.24 40.16 41.24 41.62 38 42.22 38 40.76 41.24"/>
+  <polygon class="cls-9" points="28.42 41.24 27.82 41.24 29.28 38 29.88 38 28.42 41.24"/>
+  <polygon class="cls-9" points="28.94 43 28.09 43 30.15 38 31.01 38 28.94 43"/>
+  <polygon class="cls-9" points="38.94 43 38.01 43 40.26 38 41.19 38 38.94 43"/>
+  <g>
+    <rect class="cls-5" x="13" y="38" width="8" height="5" rx=".3" ry=".3"/>
+    <polygon class="cls-9" points="19.16 41.24 18.56 41.24 20.02 38 20.62 38 19.16 41.24"/>
+    <polygon class="cls-9" points="17.34 43 16.41 43 18.66 38 19.59 38 17.34 43"/>
+  </g>
+  <g>
+    <rect class="cls-5" x="32" y="16" width="9.99" height="5" rx=".34" ry=".34"/>
+    <polygon class="cls-9" points="38.3 21 37.53 21 39.4 16 40.17 16 38.3 21"/>
+    <polygon class="cls-9" points="36.87 21 36.09 21 37.97 16 38.74 16 36.87 21"/>
+  </g>
+</svg>

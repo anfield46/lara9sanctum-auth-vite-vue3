@@ -33,7 +33,7 @@
               class="scroll-y me-n7 pe-7"
               id="kt_edit_modal_refrigerantpabrik_scroll"
             >
-                
+
                     <el-row :gutter="20">
                         <el-col :span="12">
                             <Field name="tahun" type="select" v-model="refrigerantpabrik.tahun" v-slot="{ value, field, errorMessage }">
@@ -51,14 +51,16 @@
                         </el-col>
 
                         <el-col :span="12">
-                            <Field name="sumber_emisi" v-model="refrigerantpabrik.sumber_emisi" v-slot="{ value, field, errorMessage }">
+                            <Field name="id_sumber_emisi" type="select" v-model="refrigerantpabrik.id_sumber_emisi" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Sumber Emisi" required>
-                                <el-input
-                                placeholder="Sumber Emisi"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in sumberemisi_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
@@ -66,26 +68,30 @@
 
                     <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="activity" v-model="refrigerantpabrik.activity" v-slot="{ value, field, errorMessage }">
+                            <Field name="activity" type="select" v-model="refrigerantpabrik.activity" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Activity" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in activity_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
                         <el-col :span="12">
-                            <Field name="fuel_type" v-model="refrigerantpabrik.fuel_type" v-slot="{ value, field, errorMessage }">
+                            <Field name="fuel_type" type="select" v-model="refrigerantpabrik.fuel_type" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Fuel Type" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
+                                <el-select v-bind="field" :validate-event="true" :model-value="value" filterable placeholder="Select">
+                                <el-option
+                                    v-for="item in fuel_type_options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"
                                 />
+                                </el-select>
                             </el-form-item>
                             </Field>
                         </el-col>
@@ -93,62 +99,8 @@
 
                     <el-row :gutter="20">
                         <el-col :span="12">
-                            <Field name="unit" v-model="refrigerantpabrik.unit" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Unit" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="amount" v-model="refrigerantpabrik.amount" type="number" v-slot="{ value, field, errorMessage }">
+                            <Field name="amount" type="number" v-model="refrigerantpabrik.amount" v-slot="{ value, field, errorMessage }">
                             <el-form-item :error="errorMessage" label="Amount" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="operating_emission_factor" v-model="refrigerantpabrik.operating_emission_factor" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Operating Emission Factor" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                        <el-col :span="12">
-                            <Field name="GWP" v-model="refrigerantpabrik.GWP" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="GWP" required>
-                                <el-input
-                                placeholder="0"
-                                v-bind="field"
-                                :validate-event="false"
-                                :model-value="value"
-                                />
-                            </el-form-item>
-                            </Field>
-                        </el-col>
-                    </el-row>
-
-                    <el-row :gutter="20">
-                        <el-col :span="12">
-                            <Field name="ton_CO2eq" v-model="refrigerantpabrik.ton_CO2eq" type="number" v-slot="{ value, field, errorMessage }">
-                            <el-form-item :error="errorMessage" label="Ton CO2eq" required>
                                 <el-input
                                 placeholder="0"
                                 v-bind="field"
@@ -209,50 +161,24 @@ export default {
             refrigerantpabrik: {
                 id: "",
                 tahun: "",
-                sumber_emisi: "",
+                id_sumber_emisi: "",
                 activity: "",
                 fuel_type: "",
-                unit: "",
                 amount: "",
-                operating_emission_factor: "",
-                GWP: "",
-                ton_CO2eq: "",
             },
-            tahun_options: [
-              {
-                value: '2021',
-                label: '2021',
-              },
-              {
-                value: '2022',
-                label: '2022',
-              },
-              {
-                value: '2023',
-                label: '2023',
-              },
-              {
-                value: '2024',
-                label: '2024',
-              },
-              {
-                value: '2025',
-                label: '2025',
-              },
-            ],
+            tahun_options: [],
+            sumberemisi_options: [],
+            activity_options: [],
+            fuel_type_options: [],
         }
     },
     setup() {
         const schema = yup.object({
             tahun: yup.string().required().label('Tahun'),
-            sumber_emisi: yup.string().required().label('Sumber Emisi'),
+            id_sumber_emisi: yup.string().required().label('Sumber Emisi'),
             activity: yup.string().required().label('Activity'),
             fuel_type: yup.string().required().label('Fuel Type'),
-            unit: yup.string().required().label('Unit'),
             amount: yup.number().required().label('Amount'),
-            operating_emission_factor: yup.number().required().label('Operating Emission Factor'),
-            GWP: yup.number().required().label('GWP'),
-            ton_CO2eq: yup.number().required().label('Ton CO2eq'),
             });
         return {
             schema,
@@ -263,18 +189,17 @@ export default {
             handler(val, old) {
                 this.refrigerantpabrik.id = val.id;
                 this.refrigerantpabrik.tahun = val.tahun;
-                this.refrigerantpabrik.sumber_emisi = val.sumber_emisi;
+                this.refrigerantpabrik.id_sumber_emisi = val.id_sumber_emisi;
                 this.refrigerantpabrik.activity = val.activity;
                 this.refrigerantpabrik.fuel_type = val.fuel_type;
-                this.refrigerantpabrik.unit = val.unit;
                 this.refrigerantpabrik.amount = val.amount;
-                this.refrigerantpabrik.operating_emission_factor = val.operating_emission_factor;
-                this.refrigerantpabrik.GWP = val.GWP;
-                this.refrigerantpabrik.ton_CO2eq = val.ton_CO2eq;
             },
         },
     },
     created() {
+        this.fetchTahun();
+        this.fetchSumberEmisi();
+        this.fetchAC();
     },
     methods: {
         async onSubmit(values, actions) {
@@ -326,6 +251,34 @@ export default {
             }).finally(()=>{
                 this.loading = false
             })
+        },
+        fetchTahun() {
+            axios.get(`/api/valuelist/gettahundata`)
+                .then(response => {
+                    this.tahun_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchSumberEmisi() {
+            axios.get(`/api/valuelist/getsumberemisidata`)
+                .then(response => {
+                    this.sumberemisi_options = response.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        fetchAC() {
+            axios.get(`/api/valuelist/getaircoolingsystemdata`)
+                .then(response => {
+                    this.activity_options = response.data.activity;
+                    this.fuel_type_options = response.data.fuel_type;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

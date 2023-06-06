@@ -97,6 +97,10 @@
           data-type="string"
           />
           <DxColumn
+          data-field="biodiesel"
+          data-type="string"
+          />
+          <DxColumn
           data-field="conversion_factor"
           data-type="string"
           />

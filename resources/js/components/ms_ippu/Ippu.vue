@@ -93,7 +93,7 @@
           :fixed="true"
           />
           <DxColumn
-          data-field="sumber_emisi"
+          data-field="pabrik"
           data-type="string"
           fixed-position="left"
           :fixed="true"

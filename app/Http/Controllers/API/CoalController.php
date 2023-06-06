@@ -16,7 +16,7 @@ class CoalController extends Controller
     /////////////////////////// master data
     public function loadcoal(Request $request, Core $devextreme) //dx grid
     {
-        $coal = DB::table('ms_coal as a')
+        $coal = DB::table('vw_coal as a')
             ->select('a.*');
         $data = $devextreme->data($coal, $request, 'id');
         $datax1 = array();
@@ -29,14 +29,14 @@ class CoalController extends Controller
                 'tipe_batubara' => $d->tipe_batubara,
                 'consumption_mmbtu' => $d->consumption_mmbtu,
                 'consumption_tj' => $d->consumption_tj,
-                'conversion_factor' => $d->conversion_factor,
-                'CO2_emissions_factor' => $d->CO2_emissions_factor,
-                'CO2_emissions' => $d->CO2_emissions,
-                'CH4_emissions_factor' => $d->CH4_emissions_factor,
-                'CH4_emissions' => $d->CH4_emissions,
-                'N2O_emissions_factor' => $d->N2O_emissions_factor,
-                'N2O_emissions' => $d->N2O_emissions,
-                'CO2eq' => $d->CO2eq
+                'conversion_factor' => $d->conversion_on_factor,
+                'CO2_emissions_factor' => $d->co2_emission_factor,
+                'CO2_emissions' => $d->co2_emission,
+                'CH4_emissions_factor' => $d->ch4_emission_factor,
+                'CH4_emissions' => $d->ch4_emission,
+                'N2O_emissions_factor' => $d->n2o_emission_factor,
+                'N2O_emissions' => $d->n2o_emission,
+                'CO2eq' => $d->co2eq
             );
         }
         return response()->json(
@@ -58,26 +58,26 @@ class CoalController extends Controller
     // add coal
     public function add(Request $request)
     {
-        $existing = Coal::where('tahun', $request->tahun)->where('pabrik', $request->pabrik)->where('sumber_emisi', $request->sumber_emisi)->where('tipe_batubara', $request->tipe_batubara)->first();
+        $existing = Coal::where('tahun', $request->tahun)->where('pabrik', $request->pabrik)->where('id_sumber_emisi', $request->id_sumber_emisi)->where('id_tipe_batubara', $request->id_tipe_batubara)->first();
         if ($existing) {
             return response()->json(array('messageinput'   => '0', 'message' => 'Data Gagal ditambahkan, master data sudah tersedia!'));
         }
 
         $coal = new Coal([
             'tahun' => $request->tahun,
-            'pabrik' => $request->pabrik,
-            'sumber_emisi' => $request->sumber_emisi,
-            'tipe_batubara' => $request->tipe_batubara,
+            'id_pabrik' => $request->pabrik,
+            'id_sumber_emisi' => $request->sumber_emisi,
+            'id_tipe_batubara' => $request->tipe_batubara,
             'consumption_mmbtu' => $request->consumption_mmbtu,
-            'consumption_tj' => $request->consumption_tj,
-            'conversion_factor' => $request->conversion_on_factor,
-            'CO2_emissions_factor' => $request->co2_emissions_factor,
-            'CO2_emissions' => $request->co2_emissions,
-            'CH4_emissions_factor' => $request->ch4_emissions_factor,
-            'CH4_emissions' => $request->ch4_emissions,
-            'N2O_emissions_factor' => $request->n2o_emissions_factor,
-            'N2O_emissions' => $request->n2o_emissions,
-            'CO2eq' => $request->co2eq,
+            // 'consumption_tj' => $request->consumption_tj,
+            // 'conversion_factor' => $request->conversion_on_factor,
+            // 'CO2_emissions_factor' => $request->co2_emissions_factor,
+            // 'CO2_emissions' => $request->co2_emissions,
+            // 'CH4_emissions_factor' => $request->ch4_emissions_factor,
+            // 'CH4_emissions' => $request->ch4_emissions,
+            // 'N2O_emissions_factor' => $request->n2o_emissions_factor,
+            // 'N2O_emissions' => $request->n2o_emissions,
+            // 'CO2eq' => $request->co2eq,
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ]);
