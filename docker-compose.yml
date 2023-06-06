@@ -1,0 +1,14 @@
+# version: '1.0'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    image: pkt-grk
+    container_name: pkt-grk
+    restart: always
+    ports:
+      - 44880:80
+      - 44888:443
+    volumes:
+      - .:/var/www/html
