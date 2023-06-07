@@ -81,7 +81,7 @@
 								<router-link :to="{name:'realisasi'}" class="menu-title menu-text custom-menu">Realisasi</router-link>
 							</el-menu-item>
 						</el-sub-menu>
-						<el-menu-item index="4" class="menu-text">Other</el-menu-item>
+						<!-- <el-menu-item index="4" class="menu-text">Other</el-menu-item> -->
 						<div class="flex-grow" />
 						<!-- <el-menu-item index="5">Alamsyah</el-menu-item> -->
 						<el-sub-menu index="5">

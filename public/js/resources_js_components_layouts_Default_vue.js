@@ -523,15 +523,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
 
         _: 1 /* STABLE */
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_menu_item, {
-        index: "4",
-        "class": "menu-text"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Other")];
-        }),
-        _: 1 /* STABLE */
-      }), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <el-menu-item index=\"5\">Alamsyah</el-menu-item> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_sub_menu, {
+      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <el-menu-item index=\"4\" class=\"menu-text\">Other</el-menu-item> "), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <el-menu-item index=\"5\">Alamsyah</el-menu-item> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_sub_menu, {
         index: "5"
       }, {
         title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

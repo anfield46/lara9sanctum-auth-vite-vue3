@@ -2,21 +2,23 @@
         <!-- //line chart -->
     <div class="px-0">
             
-		<div class="d-flex justify-content-between mb-3">
+		<div class="d-flex justify-content-between mb-2">
 			<h2>Dashboard Zero Emission</h2>
-			<router-link :to="{name:'faq'}" class="btn btn-sm btn-primary fw-bold wr_primary" style="display: flex;padding-top: 10px;">
-                <svg width="15" height="15" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0999 10C20.0999 15.3019 15.8018 19.6 10.4999 19.6C5.19797 19.6 0.899902 15.3019 0.899902 10C0.899902 4.69807 5.19797 0.400002 10.4999 0.400002C15.8018 0.400002 20.0999 4.69807 20.0999 10ZM10.4999 6.4C10.0573 6.4 9.66902 6.63906 9.45972 7.00087C9.12787 7.57455 8.3938 7.77058 7.82013 7.43873C7.24645 7.10688 7.05042 6.3728 7.38227 5.79913C8.00291 4.72622 9.1659 4 10.4999 4C12.4881 4 14.0999 5.61178 14.0999 7.6C14.0999 9.16747 13.0982 10.501 11.6999 10.9952V11.2C11.6999 11.8627 11.1627 12.4 10.4999 12.4C9.83718 12.4 9.29992 11.8627 9.29992 11.2V10C9.29992 9.33726 9.83718 8.8 10.4999 8.8C11.1627 8.8 11.6999 8.26274 11.6999 7.6C11.6999 6.93726 11.1627 6.4 10.4999 6.4ZM10.4999 16C11.1626 16 11.6999 15.4627 11.6999 14.8C11.6999 14.1373 11.1626 13.6 10.4999 13.6C9.83716 13.6 9.2999 14.1373 9.2999 14.8C9.2999 15.4627 9.83716 16 10.4999 16Z" fill="#F6F6F6"/>
-                </svg>
-                <span>&nbsp;FAQ</span>
-            </router-link>
+            <div class="" style="zoom: 90%;">
+                <router-link :to="{name:'faq'}" class="btn btn-sm btn-primary fw-bold wr_primary pt-1" style="display: flex;align-items: center;padding-top: 10px !important;">
+                    <svg width="15" height="15" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0999 10C20.0999 15.3019 15.8018 19.6 10.4999 19.6C5.19797 19.6 0.899902 15.3019 0.899902 10C0.899902 4.69807 5.19797 0.400002 10.4999 0.400002C15.8018 0.400002 20.0999 4.69807 20.0999 10ZM10.4999 6.4C10.0573 6.4 9.66902 6.63906 9.45972 7.00087C9.12787 7.57455 8.3938 7.77058 7.82013 7.43873C7.24645 7.10688 7.05042 6.3728 7.38227 5.79913C8.00291 4.72622 9.1659 4 10.4999 4C12.4881 4 14.0999 5.61178 14.0999 7.6C14.0999 9.16747 13.0982 10.501 11.6999 10.9952V11.2C11.6999 11.8627 11.1627 12.4 10.4999 12.4C9.83718 12.4 9.29992 11.8627 9.29992 11.2V10C9.29992 9.33726 9.83718 8.8 10.4999 8.8C11.1627 8.8 11.6999 8.26274 11.6999 7.6C11.6999 6.93726 11.1627 6.4 10.4999 6.4ZM10.4999 16C11.1626 16 11.6999 15.4627 11.6999 14.8C11.6999 14.1373 11.1626 13.6 10.4999 13.6C9.83716 13.6 9.2999 14.1373 9.2999 14.8C9.2999 15.4627 9.83716 16 10.4999 16Z" fill="#F6F6F6"/>
+                    </svg>
+                    <span class="fs-6">&nbsp;FAQ</span>
+                </router-link>
+            </div>
 		</div>
         <div class="row">
             <div class="col-8">
-                <div class="card shadow">
+                <div class="card shadow" style="--bs-card-border-color: none;">
                     <div class="card-body p-0">
                         <h3 class="m-7 zoomout">
-                            <b class="primary_color">Proyeksi Emisi GRK PKT 2019-2060 </b>
+                            <b class="primary_color">Emission Projection PT Pupuk Kaltim 2019-2060&nbsp;</b>
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 5.66667V9M9 12.3333H9.00833M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z" stroke="#4B4B50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -26,11 +28,14 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="card shadow zoomout" style="height: 100%;">
+                <div class="card shadow zoomout" style="height: 100%;--bs-card-border-color: none;">
                     <div class="card-body">
                         <h3 class="mb-7">
-                            <b class="primary_color">Intensitas Emisi Per Produk </b> 
-                            <el-tooltip
+                            <b class="primary_color">Emission Product Intensity&nbsp;</b>
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 5.66667V9M9 12.3333H9.00833M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z" stroke="#4B4B50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <!-- <el-tooltip
                                 class="box-item"
                                 effect="dark"
                                 content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
@@ -41,21 +46,21 @@
                                         <path d="M9 5.66667V9M9 12.3333H9.00833M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z" stroke="#4B4B50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </el-button>
-                            </el-tooltip>
+                            </el-tooltip> -->
                         </h3>
 
                         <div class="row">
                             <!--begin::Col-->
-                                <div class="col-6 mb-4" v-for="data in current_intensitas_emisi" :key="data.sumber_emisi">
+                                <div class="col-6 mb-5" v-for="data in current_intensitas_emisi" :key="data.sumber_emisi">
                                     <!--begin::Card widget 2-->
                                     <div class="card shadow-sm h-lg-80">
                                         <!--begin::Body-->
                                         <div class="d-flex justify-content-between align-items-start flex-column intensitas-bg">
                                             <!--begin::Section--> 
-                                            <div class="d-flex flex-column m-6">
+                                            <div class="d-flex flex-column m-8">
                                                 <!--begin::Number-->           
                                                 <span class="fw-semibold fs-4">{{ data.sumber_emisi }}</span>
-                                                <span class="fw-semibold fs-4"><span class="fs-1">{{ parseFloat(data.total).toFixed(2) }}</span> ton CO2 eq</span>
+                                                <span class="fs-4"><span class="fw-semibold  fs-1">{{ parseFloat(data.total).toFixed(2) }}</span> ton CO2 eq</span>
                                                 <!--end::Number-->
                                             </div>  
                                             <!--end::Section-->                         
@@ -71,12 +76,17 @@
             </div>
         </div>
 
-        <div class="card shadow mt-2">
+        <div class="card shadow mt-3" style="--bs-card-border-color: none;">
             <div class="row" style="padding-top: 10px;">
                 <div class="col-4 zoomout d-flex" style="align-items:center;">
                     <div class="" style="width:100%;">
-                        <div class="card-body p-4">
-                            <h3 class="primary_color"><b>Scope Emission</b></h3>
+                        <div class="card-body py-2 px-4">
+                            <h3 class="primary_color">
+                                <b>Emission Scope&nbsp;</b>
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 5.66667V9M9 12.3333H9.00833M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z" stroke="#4B4B50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </h3>
                             <div class="hello" ref="chartpiediv"></div>
                         </div>
                     </div>
@@ -84,10 +94,15 @@
                 </div>
                 <div class="col-8">
                     <div class="" style="height: 100%;">
-                        <div class="card-body p-4" style="height: 100%;">
+                        <div class="card-body py-2 px-4" style="height: 100%;">
                             <div class="d-flex justify-content-between">
-                                <h3 class="zoomout primary_color"><b>Emission Categories</b></h3>
-                                <router-link :to="{name:'faq'}" class="btn btn-sm secondary_color" style="padding: 0px;"><strong>Lihat Detail</strong></router-link>
+                                <h3 class="zoomout primary_color">
+                                    <b>Emission Categories&nbsp;</b>
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 5.66667V9M9 12.3333H9.00833M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z" stroke="#4B4B50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </h3>
+                                <router-link :to="{name:'faq'}" class="btn btn-sm secondary_color" style="padding: 0px;"><strong>See detail</strong></router-link>
                             </div>
                             <div class="" style="z-index:1000;" ref="chartbardiv"></div>
                         </div>
@@ -234,16 +249,17 @@ export default {
             }
 
             createSeries("total_bau", "Business As Usual", 1, "#F47920", "#F47920", 1, 0, null);
-            createSeries("total_rencana", "Rencana", 2, "#A8E58A", "#A8E58A", 1, 0, "5,4");
-            createSeries("total_realisasi", "Realisasi", 3, "#1268B3", "#1268B3", 1, 0, null);
+            createSeries("total_rencana", "Plan", 2, "#A8E58A", "#A8E58A", 1, 0, "5,4");
+            createSeries("total_realisasi", "Realization", 3, "#1268B3", "#1268B3", 1, 0, null);
 
             chart.legend = new am4charts.Legend();
             chart.legend.fontSize = 11;
-            chart.legend.position = "left";
+            // chart.legend.position = "left";
+            chart.legend.position = "bottom";
             chart.legend.labels.template.text = "[bold {color}]{name}[/]";
             let markerTemplate = chart.legend.markers.template;
-            markerTemplate.width = 40;
-            markerTemplate.height = 5;
+            // markerTemplate.width = 40;
+            markerTemplate.height = 1;
             // chart.cursor = new am4charts.XYCursor();
 
             /* Create a cursor */
@@ -251,7 +267,7 @@ export default {
             chart.cursor.maxTooltipDistance = -1;
 
             // Set cell size in pixels
-            var cellSize = 4.2;
+            var cellSize = 4;
             chart.events.on("datavalidated", function(ev) {
             
             // Get objects of interest
